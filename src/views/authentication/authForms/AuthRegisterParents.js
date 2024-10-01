@@ -30,7 +30,7 @@ const AuthRegisterParents = ({title, subtitle, subtext}) => {
     useEffect(() => {
         const fetchStatusKeluarga = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/wali-siswa/status-keluarga/options');
+                const response = await axios.get('https://backendsiakbo-production.up.railway.app/wali-siswa/status-keluarga/options');
                 const sortedStatusKeluarga = response.data.sort((a, b) => a.nama_status.localeCompare(b.nama_status));
                 setStatusKeluargaOptions(sortedStatusKeluarga);
                 console.log(response.data);
@@ -46,7 +46,7 @@ const AuthRegisterParents = ({title, subtitle, subtext}) => {
         setError('');
         setSuccess('');
         try {
-            await axios.post('http://localhost:4000/auth/register/wali-siswa', {
+            await axios.post('https://backendsiakbo-production.up.railway.app/auth/register/wali-siswa', {
                 name,
                 email,
                 password,

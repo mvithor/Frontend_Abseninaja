@@ -34,7 +34,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     useEffect(() => {
         const fetchGenderOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/users/jenis-kelamin');
+                const response = await axios.get('https://backendsiakbo-production.up.railway.app/jenis-kelamin');
                 setGenderOptions(response.data);
                 console.log(response.data)
             } catch (error) {
@@ -44,7 +44,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
         const fetchKelasOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/kelas/auth/kelas');
+                const response = await axios.get('https://backendsiakbo-production.up.railway.app/kelas/auth/kelas');
                 const sortedKelas = response.data.sort((a, b) => a.nama_kelas.localeCompare(b.nama_kelas));
                 setKelasOptions(sortedKelas);
                 console.log(sortedKelas);
@@ -62,7 +62,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
         setError('');
         setSuccess('');
         try {
-            await axios.post('http://localhost:4000/auth/register', {
+            await axios.post('https://backendsiakbo-production.up.railway.app/auth/register', {
                 name,
                 email,
                 password,
