@@ -9,13 +9,13 @@ import { styled } from '@mui/material';
 const Header = styled('header')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  height: '60px', // Sesuaikan dengan tinggi header Anda
+  height: '80px', // Sesuaikan dengan tinggi header Anda
   padding: '0 4px', // Tambahkan padding horizontal jika diperlukan
 }));
 
 const LogoWrapper = styled(Link)(({ theme }) => ({
   display: 'block',
-  height: '40px', // Sesuaikan tinggi logo jika diperlukan
+  height: '30px', // Sesuaikan tinggi logo jika diperlukan
   '& svg': {
     height: '100%', // Mengatur tinggi SVG agar sesuai dengan tinggi kontainer
     width: 'auto', // Mengatur lebar SVG secara otomatis untuk menjaga proporsi

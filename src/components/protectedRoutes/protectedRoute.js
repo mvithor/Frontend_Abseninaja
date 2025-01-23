@@ -7,7 +7,7 @@ const ProtectedRoute = ({ allowedRoles }) => {
 
   if (!accessToken) {
     // Jika tidak ada token, arahkan ke halaman login
-    return <Navigate to="/auth/login" />;
+    return <Navigate to="/" />;
   }
 
   if (!allowedRoles.includes(role)) {

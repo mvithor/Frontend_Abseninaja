@@ -1,4 +1,4 @@
-import axios from '../../../utils/axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import { createSlice } from '@reduxjs/toolkit';
 import { uniqueId } from 'lodash';
 import { sub } from 'date-fns';
@@ -53,7 +53,7 @@ export const { SearchChat, getChats, sendMsg, SelectChat } = ChatSlice.actions;
 
 export const fetchChats = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${API_URL}`);
+    const response = await axiosInstance.get(`${API_URL}`);
     dispatch(getChats(response.data));
   } catch (err) {
     throw new Error(err);

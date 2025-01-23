@@ -1,4 +1,4 @@
-import axios from 'src/utils/axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import { createSlice } from '@reduxjs/toolkit';
 import { map } from 'lodash';
 
@@ -45,7 +45,7 @@ export const { getPosts, getFollowers, onToggleFollow, getPhotos } = UserProfile
 
 export const fetchPosts = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${API_URL}`);
+    const response = await axiosInstance.get(`${API_URL}`);
     dispatch(getPosts(response.data));
   } catch (err) {
     throw new Error(err);
@@ -53,7 +53,7 @@ export const fetchPosts = () => async (dispatch) => {
 };
 export const likePosts = (postId) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/data/posts/like', { postId });
+    const response = await axiosInstance.post('/api/data/posts/like', { postId });
     dispatch(getPosts(response.data.posts));
   } catch (err) {
     throw new Error(err);
@@ -61,7 +61,7 @@ export const likePosts = (postId) => async (dispatch) => {
 };
 export const addComment = (postId, comment) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/data/posts/comments/add', { postId, comment });
+    const response = await axiosInstance.post('/api/data/posts/comments/add', { postId, comment });
     dispatch(getPosts(response.data.posts));
   } catch (err) {
     throw new Error(err);
@@ -70,7 +70,7 @@ export const addComment = (postId, comment) => async (dispatch) => {
 
 export const addReply = (postId, commentId, reply) => async (dispatch) => {
   try {
-    const response = await axios.post('/api/data/posts/replies/add', { postId, commentId, reply });
+    const response = await axiosInstance.post('/api/data/posts/replies/add', { postId, commentId, reply });
     dispatch(getPosts(response.data.posts));
   } catch (err) {
     throw new Error(err);
@@ -79,7 +79,7 @@ export const addReply = (postId, commentId, reply) => async (dispatch) => {
 
 export const fetchFollwores = () => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/data/users`);
+    const response = await axiosInstance.get(`/api/data/users`);
     dispatch(getFollowers(response.data));
   } catch (err) {
     throw new Error(err);
@@ -88,7 +88,7 @@ export const fetchFollwores = () => async (dispatch) => {
 
 export const fetchPhotos = () => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/data/gallery`);
+    const response = await axiosInstance.get(`/api/data/gallery`);
     dispatch(getPhotos(response.data));
   } catch (err) {
     throw new Error(err);

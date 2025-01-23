@@ -1,8 +1,6 @@
 import React from 'react';
-import Menuitems from './MenuItems'; // Import menu
-import MenuitemsSiswa from './MenuItemsSiswa'; // Import menu siswa
-import MenuitemsGuru from './MenuItemsGuru'; // Import menu guru
-import MenuitemsWaliSiswa from './MenuItemsWaliSiswa'; // Import menu wali siswa
+import MenuitemsSuperAdmin from './MenuItemsSuperAdmin';
+import MenuitemsAdminSekolah from './MenuItemsAdminSekolah';
 import { useLocation } from 'react-router';
 import { Box, List, useMediaQuery } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
@@ -25,17 +23,11 @@ const SidebarItems = () => {
   // Pilih menu items berdasarkan user role
   let menuItems;
   switch (role) {
-    case 'admin':
-      menuItems = Menuitems;
+    case 'super admin':
+      menuItems = MenuitemsSuperAdmin;
       break;
-    case 'siswa':
-      menuItems = MenuitemsSiswa;
-      break;
-    case 'guru':
-      menuItems = MenuitemsGuru;
-      break;
-      case 'wali siswa':
-      menuItems = MenuitemsWaliSiswa;
+    case 'admin sekolah':
+      menuItems = MenuitemsAdminSekolah;
         break;
     default:
       menuItems = []; // Kosongkan menu items jika role tidak dikenali

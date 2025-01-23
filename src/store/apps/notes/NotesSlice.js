@@ -1,4 +1,4 @@
-import axios from '../../../utils/axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import { createSlice } from '@reduxjs/toolkit';
 
 const API_URL = '/api/data/notes/NotesData';
@@ -59,7 +59,7 @@ export const { SearchNotes, getNotes, SelectNote, DeleteNote, UpdateNote, addNot
 
 export const fetchNotes = () => async (dispatch) => {
   try {
-    const response = await axios.get(`${API_URL}`);
+    const response = await axiosInstance.get(`${API_URL}`);
     dispatch(getNotes(response.data));
   } catch (err) {
     throw new Error(err);

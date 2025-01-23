@@ -1,22 +1,18 @@
 import React from 'react';
-import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '@mui/material';
-import PropTypes from 'prop-types';
+import { IconButton, AppBar, useMediaQuery, Toolbar, styled, Stack, Box } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleSidebar, toggleMobileSidebar } from 'src/store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons';
 
 // components
 import Notifications from './Notifications';
-
+import SearchAdminSekolah from './SearchAdminSekolah';
 import ProfileAdmin from './ProfileAdmin';
 import ProfileSiswa from './ProfileSiswa';
 
-
 const Header = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-
-  // drawer
-  const customizer = useSelector((state) => state.customizer);
+  // const customizer = useSelector((state) => state.customizer);
   const dispatch = useDispatch();
 
   // role
@@ -27,44 +23,55 @@ const Header = () => {
     background: theme.palette.background.paper,
     justifyContent: 'center',
     backdropFilter: 'blur(4px)',
+    minHeight: '64px', // Pastikan tinggi tidak lebih dari 64px
     [theme.breakpoints.up('lg')]: {
-      minHeight: customizer.TopbarHeight,
+      minHeight: '64px', // Samakan tinggi header di desktop
     },
   }));
-
-  const ToolbarStyled = styled(Toolbar)(({theme}) => ({
-
+  
+  const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
     width: '100%',
+    maxHeight: '64px', // Batasi tinggi toolbar agar tidak lebih tinggi
     color: theme.palette.text.secondary,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   }));
+  
 
   return (
     <AppBarStyled position="sticky" color="default">
       <ToolbarStyled>
         {/* ------------------------------------------- */}
-        {/* Toggle Button Sidebar */}
+        {/* Menu dan Search di sebelah kiri */}
         {/* ------------------------------------------- */}
-        <IconButton
-          color="inherit"
-          aria-label="menu"
-          onClick={lgUp ? () => dispatch(toggleSidebar()) : () => dispatch(toggleMobileSidebar())}
-        >
-          <IconMenu2 size="20" />
-        </IconButton>
-        <Box flexGrow={1} />
+        <Stack spacing={2} direction="row" alignItems="center" sx={{ flex: 1 }}>
+          <IconButton
+            color="inherit"
+            aria-label="menu"
+            onClick={lgUp ? () => dispatch(toggleSidebar()) : () => dispatch(toggleMobileSidebar())}
+          >
+            <IconMenu2 size="20" />
+          </IconButton>
+
+          {/* Wrapper untuk Search agar tidak terlalu lebar */}
+          {role === 'admin sekolah' && (
+            <Box sx={{ flexGrow: 1, maxWidth: '300px' }}> {/* Batasi max width untuk search */}
+              <SearchAdminSekolah />
+            </Box>
+          )}
+        </Stack>
+
+        {/* ------------------------------------------- */}
+        {/* Profil dan Notifications di sebelah kanan */}
+        {/* ------------------------------------------- */}
         <Stack spacing={1} direction="row" alignItems="center">
           <Notifications />
-
           {role === 'admin' ? <ProfileAdmin /> : <ProfileSiswa />}
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>
   );
-};
-
-Header.propTypes = {
-  sx: PropTypes.object,
-  toggleSidebar: PropTypes.func,
 };
 
 export default Header;

@@ -2,7 +2,7 @@ const baselightTheme = {
   direction: 'ltr',
   palette: {
     primary: {
-      main: '#F48C06',
+      main: '#973BE0',
       light: '#ECF2FF',
       dark: '#4570EA',
       about: '#FFAB00',
@@ -38,11 +38,6 @@ const baselightTheme = {
       dark: '#ae8e59',
       contrastText: '#ffffff',
     },
-    purple: {
-      A50: '#EBF3FE',
-      A100: '#6610f2',
-      A200: '#557fb9',
-    },
     grey: {
       100: '#F2F6FA',
       200: '#EAEFF4',
@@ -51,6 +46,11 @@ const baselightTheme = {
       500: '#5A6A85',
       600: '#2A3547',
     },
+    // text: {
+    //   primary: '##7C858A', // Warna teks utama menjadi hitam di light mode
+    //   // secondary: '',
+    //   secondary: '#000000',
+    // },
     text: {
       primary: '#2A3547',
       secondary: '#2A3547',
@@ -62,7 +62,8 @@ const baselightTheme = {
     },
     divider: '#e5eaef',
     background: {
-      default: '#ffffff',
+      paper: '#ffffff', // Latar belakang utama halaman tetap putih (sidebar/header)
+      default: '#f0f0f0',   // Area di bawah `topcards` abu-abu terang
     },
   },
 };
@@ -104,11 +105,6 @@ const baseDarkTheme = {
       dark: '#ae8e59',
       contrastText: '#ffffff',
     },
-    purple: {
-      A50: '#EBF3FE',
-      A100: '#6610f2',
-      A200: '#557fb9',
-    },
     grey: {
       100: '#333F55',
       200: '#465670',
@@ -119,8 +115,8 @@ const baseDarkTheme = {
       A700: '#465670',
     },
     text: {
-      // primary: 'rgba(105, 105, 132, 1)',
-      // secondary: '#EAEFF4',
+      primary: '#ffffff', // Teks utama putih di dark mode
+      secondary: '#b0b3b8', // Teks sekunder abu-abu muda
     },
     action: {
       disabledBackground: 'rgba(73,82,88,0.12)',
@@ -129,9 +125,8 @@ const baseDarkTheme = {
     },
     divider: '#333F55',
     background: {
-      default: '#171c23',
-      dark: '#171c23',
-      paper: '#171c23',
+      default: '#171c23', // Latar belakang utama halaman di dark mode
+      paper: '#1e1e2d',   // Area di bawah `topcards` gelap
     },
   },
 };

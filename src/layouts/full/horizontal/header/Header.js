@@ -6,7 +6,7 @@ import { toggleMobileSidebar } from 'src/store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons';
 import Notifications from 'src/layouts/full/vertical/header/Notifications';
 import Profile from 'src/layouts/full/vertical/header/ProfileAdmin';
-import Search from 'src/layouts/full/vertical/header/Search';
+import Search from 'src/layouts/full/vertical/header/SearchAdminSekolah';
 import Navigation from 'src/layouts/full/vertical/header/Navigation';
 import Logo from 'src/layouts/full/shared/logo/Logo';
 

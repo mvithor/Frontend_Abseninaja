@@ -13,13 +13,12 @@ import storage from 'redux-persist/lib/storage';
 import CustomizerReducer from './customizer/CustomizerSlice';
 import ChatsReducer from './apps/chat/ChatSlice';
 import NotesReducer from './apps/notes/NotesSlice';
-import TicketReducer from './apps/tickets/TicketSlice';
 import UserProfileReducer from './apps/userProfile/UserProfileSlice';
 import sidebarReducer from './apps/sidebar/sidebarSlice';
 import userReducer from './apps/user/userSlice';
 import studentReducer from './apps/students/studentSlice';
-import KonselingReducer from './apps/tiketKonseling/TiketKonselingIndividuSlice';
-import KonsultasiReducer from './apps/tiketKonsultasi/TiketKonsultasiSlice';
+import PendaftaranSekolahReducer from './apps/pendaftaran-sekolah/PendaftaranSekolahSlice';
+
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -27,11 +26,9 @@ const rootReducer = combineReducers({
   customizer: CustomizerReducer,
   chat: ChatsReducer,
   notes: NotesReducer,
-  ticket: TicketReducer,
   userProfile: UserProfileReducer,
   sidebar: sidebarReducer,
-  konseling: KonselingReducer,
-  konsultasi: KonsultasiReducer
+  pendaftaran: PendaftaranSekolahReducer,
 });
 
 // Konfigurasi persistensi

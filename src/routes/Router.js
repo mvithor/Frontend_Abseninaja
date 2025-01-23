@@ -1,97 +1,118 @@
-import React, { lazy } from 'react';
+import { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import ProtectedRoute from 'src/components/protectedRoutes/protectedRoute';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
+
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')));
 
-/* ****Dashboards***** */
+/* ****Dashboard Super Admin***** */
 const DashboardAdmin = Loadable(lazy(() => import('../views/dashboard/Admin')));
-const DashboardSiswa = Loadable(lazy(() => import('../views/dashboard/Siswa')));
-const DashboardGuru = Loadable(lazy(() => import('../views/dashboard/Guru')));
-const DashboardWaliSiswa = Loadable(lazy(() => import('../views/dashboard/WaliSiswa')));
-// Siswa
-const StudentList = Loadable(lazy(() => import('../views/apps/siswa/SiswaList')));
-const StudentEdit = Loadable(lazy(() => import('../views/apps/siswa/SiswaEdit')));
-// Konselor
-const KonselorAdd = Loadable(lazy(() => import('../views/apps/konselor/KonselorAdd')))
-const KonselorList = Loadable(lazy(() => import('../views/apps/konselor/KonselorList')));
-const KonselorEdit = Loadable(lazy(() => import('../views/apps/konselor/KonselorEdit')));
-// Pelanggaran
-const PelanggaranList = Loadable(lazy(() => import('../views/apps/pelanggaran/PelanggaranList')));
-const PelanggaranAdd = Loadable(lazy(() => import('../views/apps/pelanggaran/PelanggaranAdd')));
-const PelanggaranEdit = Loadable(lazy(() => import('../views/apps/pelanggaran/PelanggaranEdit')));
+
+// Status Kerja Sama
+const StatusKerjaSamaList = Loadable(lazy(() => import('../views/apps/super-admin/status-kerja-sama/StatusKerjaSamaList')));
+const StatusKerjaSamaAdd = Loadable(lazy(() => import('../views/apps/super-admin/status-kerja-sama/StatusKerjaSamaAdd')));
+const StatusKerjaSamaEdit = Loadable(lazy(() => import('../views/apps/super-admin/status-kerja-sama/StatusKerjaSamaEdit')));
+// Pendaftaran Sekolah
+const PendaftaranSekolahList = Loadable(lazy(() => import('../views/apps/super-admin/pendaftaran-sekolah/PendaftaranSekolahList')));
+const PendaftaranSekolahAdd = Loadable(lazy(() => import('../views/apps/super-admin/pendaftaran-sekolah/PendaftaranSekolahAdd')));
+const PendaftaranSekolahEdit = Loadable(lazy(() => import('../views/apps/super-admin/pendaftaran-sekolah/PendaftaranSekolahEdit')));
+// Data Admin Sekolah
+const AdminSekolahList = Loadable(lazy(() => import('../views/apps/super-admin/admin-sekolah/AdminSekolahList')));
+const AdminSekolahAdd = Loadable(lazy(() => import('../views/apps/super-admin/admin-sekolah/AdminSekolahAdd')));
+
+/* ****Dashboard Admin Sekolah***** */
+const DashboardAdminSekolah = Loadable(lazy(() => import('../views/dashboard/AdminSekolah')));
+// Kategori Pegawai
+const KategoriPegawaiList = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/KategoriPegawaiList')));
+const KategoriPegawaiAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/KategoriPegawaiAdd')));
+const KategoriPegawaiEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/KategoriPegawaiEdit')));
+const KategoriPegawaiDetail = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/KategoriPegawaiDetail')));
+const KategoriPegawaiDetailAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/kategoriPegawaiDetailAdd')));
+const KategoriPegawaiDetailEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-pegawai/KategoriPegawaiDetailEdit')));
+// Data Pegawai Guru
+const PegawaiGuruList = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-guru/PegawaiGuruList')));
+const PegawaiGuruAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-guru/PegawaiGuruAdd')));
+const PegawaiGuruEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-guru/PegawaiGuruEdit')));
+// Data Pegawai Staf
+const PegawaiStafList = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-staf/PegawaiStafList')));
+const PegawaiStafAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-staf/PegawaiStafAdd')));
+const PegawaiStafEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-staf/PegawaiStafEdit')));
+// Mata Pelajaran
+const MataPelajaranList = Loadable(lazy(() => import('../views/apps/admin-sekolah/mata-pelajaran/MataPelajaranList')));
+const MataPelajaranAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/mata-pelajaran/MataPelajaranAdd')));
+const MataPelajaranEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/mata-pelajaran/MataPelajaranEdit')));
+// Tingkatan Kelas
+const TingkatList = Loadable(lazy(() => import('../views/apps/admin-sekolah/tingkat/TingkatList')));
+const TingkatAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/tingkat/TingkatAdd')));
+const TingkatEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/tingkat/TingkatEdit')));
 // Kelas
-const KelasList = Loadable(lazy(() => import('../views/apps/kelas/KelasList')));
-const KelasAdd = Loadable(lazy(() => import('../views/apps/kelas/KelasAdd')));
-const KelasEdit = Loadable(lazy(() => import('../views/apps/kelas/KelasEdit')));
-const KelasDetail = Loadable(lazy(() => import('../views/apps/kelas/KelasDetail')));
+const KelasList = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasList')));
+const KelasAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasAdd')));
+const KelasEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasEdit')));
 // Wali Kelas
-const WaliKelasList = Loadable(lazy(() => import('../views/apps/waliKelas/WaliKelasList')));
-const WaliKelasAdd = Loadable(lazy(() => import('../views/apps/waliKelas/WaliKelasAdd')));
-const WaliKelasEdit = Loadable(lazy(() => import('../views/apps/waliKelas/WaliKelasEdit')));
-// Prestasi Madrasah
-const PrestasiMadrasahList = Loadable(lazy(() => import('../views/apps/prestasiMadrasah/PrestasiMadrasahList')));
-const PrestasiMadrasahAdd = Loadable(lazy(() => import('../views/apps/prestasiMadrasah/PrestasiMadrasahAdd')));
-const PrestasiMadrasahEdit = Loadable(lazy(() => import('../views/apps/prestasiMadrasah/PrestasiMadrasahEdit')));
-// Prestasi Individu
-const PrestasiIndividuList = Loadable(lazy(() => import('../views/apps/prestasiIndividu/prestasiIndividuList')));
-const PrestasiIndividuAdd = Loadable(lazy(() => import('../views/apps/prestasiIndividu/PrestasiIndividuAdd')));
-const PrestasiIndividuEdit = Loadable(lazy(() => import('../views/apps/prestasiIndividu/PrestasiIndividuEdit')));
-// Nama Regu
-const NamaReguList = Loadable(lazy(() => import('../views/apps/prestasiRegu/NamaReguList')));
-const NamaReguAdd = Loadable(lazy(() => import('../views/apps/prestasiRegu/NamaReguAdd')));
-const NamaReguEdit = Loadable(lazy(() => import('../views/apps/prestasiRegu/NamaReguEdit')));
-const NamaReguDetail = Loadable(lazy(() => import('../views/apps/prestasiRegu/NamaReguDetail')));
-// Detail Prestasi Regu
-const PrestasiReguAdd = Loadable(lazy(() => import('../views/apps/prestasiRegu/detail prestasi siswa/AddDetailPrestasiSiswa')));
-const PrestasiReguEdit = Loadable(lazy(() => import('../views/apps/prestasiRegu/detail prestasi siswa/EditDetailPrestasiSiswa')));
-// Bidang Bimbingan
-const BidangBimbinganList = Loadable(lazy(() => import('../views/apps/bimbingan/BidangBimbinganList')));
-const BidangBimbinganAdd = Loadable(lazy(() => import('../views/apps/bimbingan/BidangBimbinganAdd')));
-const BidangBimbinganEdit = Loadable(lazy(() => import('../views/apps/bimbingan/BidangBimbinganEdit')));
-// Tiket Konseling Individu
-const TiketKonselingIndividuList = Loadable(lazy(() => import('../views/apps/tiketKonseling/TiketKonselingIndividuList')));
-const TiketKonselingIndividuEdit = Loadable(lazy(() => import('../views/apps/tiketKonseling/TiketKonselingIndividuEdit')));
-// Tiket Konsultasi Wali Siswa
-const TiketKonsultasiList = Loadable(lazy(() => import('../views/apps/tiketKonsultasi/TiketKonsultasiList')));
-const TiketKonsultasiEdit = Loadable(lazy(() => import('../views/apps/tiketKonsultasi/TiketKonsultasiEdit')));
-// Kategori Poin
-const KategoriPoinList = Loadable(lazy(() => import('../views/apps/kategoriPoin/KategoriPoinList')));
-const KategoriPoinAdd = Loadable(lazy(() => import('../views/apps/kategoriPoin/KategoriPoinAdd')));
-const KategoriPoinEdit = Loadable(lazy(() => import('../views/apps/kategoriPoin/KategoriPoinEdit')));
-// Log Poin Siswa 
-const LogPoinSiswaList = Loadable(lazy(() => import('../views/apps/logPoinSiswa/LogPoinSiswaList')));
-// Poin Siswa 
-const PoinSiswaList = Loadable(lazy(() => import('../views/apps/poinSiswa/PoinSiswaList')));
-const PoinSiswaAdd = Loadable(lazy(() => import('../views/apps/poinSiswa/PoinSiswaAdd')));
-// Status Keluarga
-const StatusKeluargaList = Loadable(lazy(() => import('../views/apps/statusKeluarga/StatusKeluargaList')));
-const StatusKeluargaAdd = Loadable(lazy(() => import('../views/apps/statusKeluarga/StatusKeluargaAdd')));
-const StatusKeluargaEdit = Loadable(lazy(() => import('../views/apps/statusKeluarga/StatusKeluargaEdit')));
-// Wali Siswa
-const WaliSiswaList = Loadable(lazy(() => import('../views/apps/waliSiswa/WaliSiswaList')));
-// Users
-const UsersList = Loadable(lazy(() => import('../views/apps/users/UsersList')));
-const UsersEdit = Loadable(lazy(() => import('../views/apps/users/UsersEdit')));
+const WaliKelasList = Loadable(lazy(() => import('../views/apps/admin-sekolah/wali-kelas/WaliKelasList')));
+const WaliKelasAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/wali-kelas/WaliKelasAdd')));
+const WaliKelasEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/wali-kelas/WaliKelasEdit')));
+// Guru Mata Pelajaran
+const GuruMapelList = Loadable(lazy(() => import('../views/apps/admin-sekolah/guru-mapel/GuruMapelList')));
+const GuruMapelAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/guru-mapel/GuruMapelAdd')));
+const GuruMapelEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/guru-mapel/GuruMapelEdit')));
+// Hari
+const HariList = Loadable(lazy(() => import('../views/apps/admin-sekolah/hari/HariList')));
+const HariAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/hari/HariAdd')));
+const HariEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/hari/HariEdit')));
+// Waktu/Jam
+const WaktuList = Loadable(lazy(() => import('../views/apps/admin-sekolah/waktu/WaktuList')));
+const WaktuAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/waktu/WaktuAdd')));
+const WaktuEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/waktu/WaktuEdit')));
+const CloneWaktu = Loadable(lazy(() => import('../views/apps/admin-sekolah/waktu/CloneWaktu')));
+// Kategori Waktu
+const KategoriWaktuList = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-waktu/KategoriWaktuList')));
+const KategoriWaktuAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-waktu/KategoriWaktuAdd')));
+const KategoriWaktuEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/kategori-waktu/KategoriWaktuEdit')));
+// Jadwal Mapel
+const JadwalMapelList = Loadable(lazy(() => import('../views/apps/admin-sekolah/jadwal-mapel/JadwalMapelList')));
+const JadwalMapelAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/jadwal-mapel/JadwalMapelAdd')));
+// User Guru
+const UserGuruList = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-guru/UserGuruList')));
 
-/* ****Dashboard Siswa***** */
-const PrestasiIndividuSiswaList = Loadable(lazy(() => import('../views/apps/dashboardSiswa/PrestasiIndividuSiswaList'))); 
-const KonselingIndividuSiswaAdd = Loadable(lazy(() => import('../views/apps/dashboardSiswa/KonselingIndividuAdd')));
-const KonselingIndividuSiswaList = Loadable(lazy(() => import('../views/apps/dashboardSiswa/KonselingIndividuList')));
-const CatatanKonseling = Loadable(lazy(() => import('../views/apps/dashboardSiswa/CatatanKonselingList')));
+// User Staf
+const UserStafList = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-staf/UserStafList')));
 
-/* ****Dashboard Wali Siswa***** */
-const KonsultasiWaliSiswaList =  Loadable(lazy(() => import('../views/apps/dashboardWaliSiswa/KonsultasiList')));
-const KonsultasiWaliSiswaAdd =  Loadable(lazy(() => import('../views/apps/dashboardWaliSiswa/KonsultasiAdd')));
-// Pages
-const AccountSettingSiswa = Loadable(lazy(() => import('../views/pages/account-setting/AccountSettingSiswa')));
+// User Siswa
+const UserSiswaList = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-siswa/UserSiswaList')));
+
+// User Admin
+const UserAdminList = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-admin/UserAdminList')));
+const UserAdminAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-admin/UserAdminAdd')));
+// Data Siswa
+const SiswaList = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-siswa/SiswaList')));
+const SiswaAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-siswa/SiswaAdd')));
+// Status kehadiran
+const StatusKehadiranList = Loadable(lazy(() => import('../views/apps/admin-sekolah/status-kehadiran/StatusKehadiranList')));
+const StatusKehadiranAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/status-kehadiran/StatusKehadiranAdd')));
+const StatusKehadiranEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/status-kehadiran/StatusKehadiranEdit')));
+// QR Code
+const QrCodeGenerateList = Loadable(lazy(() => import('../views/apps/admin-sekolah/qr-codes/QrCodeGeneratelist')));
+
+// Absensi
+const QrCodeScanView = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/QrCodeScanView')));
+const AbsensiList = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/AbsensiList')));
+const AbsensiAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/AbsensiAdd')));
+// Rekap Absensi
+const RekapAbsensiList = Loadable(lazy(() => import('../views/apps/admin-sekolah/rekap-absensi/RekapAbsensiList')));
+
+// Pengaturan Jam
+const PengaturanJamList = Loadable(lazy(() => import('../views/apps/admin-sekolah/pengaturan-jam/PengaturanJamList')));
+const PengaturanJamEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/pengaturan-jam/PengaturanJamEdit')));
 
 // authentication
 const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login')));
 const Register = Loadable(lazy(() => import('../views/authentication/auth1/Register')));
+const RegisterSchool = Loadable(lazy(() => import('../views/authentication/auth1/RegisterSchool')));
 const RegisterParents = Loadable(lazy(() => import('../views/authentication/auth1/RegisterParents')));
 const ForgotPassword = Loadable(lazy(() => import('../views/authentication/auth1/ForgotPassword')));
 const TwoSteps = Loadable(lazy(() => import('../views/authentication/auth1/TwoSteps')));
@@ -101,17 +122,17 @@ const Forbidden = Loadable(lazy(() => import('../views/authentication/Forbidden'
 const Maintenance = Loadable(lazy(() => import('../views/authentication/Maintenance')));
 
 // landingpage
-const LandingPage = Loadable(lazy(() => import('../views/pages/landingpage/Landingpage')));
 
 const Router = [
   {
     path: '/',
     element: <BlankLayout />, 
     children: [
-      { path: '/', element: <LandingPage /> },
+      { path: '/', element: <Login /> },
       { path: '/auth/404', element: <Error /> },
-      { path: '/auth/login', element: <Login /> },
+      // { path: '/auth/login', element: <Login /> },
       { path: '/auth/register/student', element: <Register /> },
+      { path: '/auth/register/school', element: <RegisterSchool /> },
       { path: '/auth/register/parents', element: <RegisterParents /> },
       { path: '/auth/forgot-password', element: <ForgotPassword /> },
       { path: '/auth/two-steps', element: <TwoSteps /> },
@@ -127,101 +148,108 @@ const Router = [
     children: [
       { 
         path: 'dashboard/admin',
-        element: <ProtectedRoute allowedRoles={['admin']} />,
+        element: <ProtectedRoute allowedRoles={['super admin']} />,
         children: [
           { path: '', element: <DashboardAdmin /> },
-          // Siswa
-          { path: 'siswa', element: <StudentList /> },
-          { path: 'siswa/edit/:id', element: <StudentEdit /> },
-          // Konselor
-          { path: 'konselor', element: <KonselorList /> },
-          { path: 'konselor/tambah-konselor', element: <KonselorAdd /> },
-          { path: 'konselor/edit/:id', element: <KonselorEdit /> },
-          // Pelanggaran
-          { path: 'pelanggaran', element: <PelanggaranList /> },
-          { path: 'pelanggaran/add-pelanggaran', element: <PelanggaranAdd /> },
-          { path: 'pelanggaran/edit/:id', element: <PelanggaranEdit /> },
+            // Status Kerja Sama
+          { path: 'status', element: <StatusKerjaSamaList /> },
+          { path: 'status/tambah-status', element: <StatusKerjaSamaAdd /> },
+          { path: 'status/edit/:id', element: <StatusKerjaSamaEdit /> },
+            // Pendaftaran Sekolah
+          { path: 'manajemen-sekolah/pendaftaran-sekolah', element: <PendaftaranSekolahList /> },
+          { path: 'manajemen-sekolah/pendaftaran/edit/:id', element: <PendaftaranSekolahEdit /> },
+          { path: 'manajemen-sekolah/pendaftaran/tambah', element: <PendaftaranSekolahAdd /> },
+            // Admin Sekolah
+          { path: 'manajemen-sekolah/admin-sekolah', element: <AdminSekolahList /> },
+          { path: 'manajemen-sekolah/tambah-admin/:sekolah_id', element: <AdminSekolahAdd /> },
+            
+        ],
+      },
+      {
+        path: 'dashboard/admin-sekolah',
+        element: <ProtectedRoute allowedRoles={['admin sekolah']} />,
+        children: [
+          { path: '', element: <DashboardAdminSekolah /> },
+            // Kategori Pegawai
+          { path: 'kategori-pegawai', element: <KategoriPegawaiList /> },
+          { path: 'kategori-pegawai/tambah-kategori', element: <KategoriPegawaiAdd /> },
+          { path: 'kategori-pegawai/edit/:id', element: <KategoriPegawaiEdit/> },
+          { path: 'kategori-pegawai/detail/:id', element: <KategoriPegawaiDetail/> },
+          { path: 'kategori-pegawai/:id/tambah-sub-kategori', element: <KategoriPegawaiDetailAdd/> },
+          { path: 'kategori-pegawai/:id/edit-sub-kategori/:subKategoriId', element: <KategoriPegawaiDetailEdit/> },
+          // Data Guru
+          { path: 'pegawai/guru', element: <PegawaiGuruList /> },
+          { path: 'pegawai/guru/tambah-guru', element: <PegawaiGuruAdd /> },
+          { path: 'pegawai/guru/edit/:id', element: <PegawaiGuruEdit /> },
+          // Data Staf
+          { path: 'pegawai/staf', element: <PegawaiStafList /> },
+          { path: 'pegawai/staf/tambah-staf', element: <PegawaiStafAdd /> },
+          { path: 'pegawai/staf/edit/:id', element: <PegawaiStafEdit /> },
+          // Mata Pelajaran
+          { path: 'mata-pelajaran', element: <MataPelajaranList/> },
+          { path: 'mata-pelajaran/tambah-mapel', element: <MataPelajaranAdd/> },
+          { path: 'mata-pelajaran/edit/:id', element: <MataPelajaranEdit/> },
+          // Tingkat Kelas
+          { path: 'tingkat', element: <TingkatList/> },
+          { path: 'tingkat/tambah-tingkat', element: <TingkatAdd/> },
+          { path: 'tingkat/edit/:id', element: <TingkatEdit/> },
           // Kelas
-          { path: 'kelas', element: <KelasList /> },
-          { path: 'kelas/tambah-kelas', element: <KelasAdd /> },
-          { path: 'kelas/edit/:id', element: <KelasEdit /> },
-          { path: 'kelas/detail/:id', element: <KelasDetail /> },
+          { path: 'kelas', element: <KelasList/> },
+          { path: 'kelas/tambah-kelas', element: <KelasAdd/> },
+          { path: 'kelas/edit/:id', element: <KelasEdit/> },
           // Wali Kelas
-          { path: 'wali-kelas', element: <WaliKelasList /> },
-          { path: 'wali-kelas/tambah-wali-kelas', element: <WaliKelasAdd /> },
-          { path: 'wali-kelas/edit/:id', element: <WaliKelasEdit /> },
-          // Prestasi Madrasah
-          { path: 'prestasi/madrasah', element: <PrestasiMadrasahList /> },
-          { path: 'prestasi/madrasah/tambah-prestasi-madrasah', element: <PrestasiMadrasahAdd /> },
-          { path: 'prestasi/madrasah/edit/:id', element: <PrestasiMadrasahEdit /> },
-          // Prestasi Individu
-          { path: 'prestasi/individu', element: <PrestasiIndividuList /> },
-          { path: 'prestasi/individu/tambah-prestasi-individu', element: <PrestasiIndividuAdd /> },
-          { path: 'prestasi/individu/edit/:id', element: <PrestasiIndividuEdit /> },
-          // Nama Regu
-          { path: 'prestasi/regu', element: <NamaReguList /> },
-          { path: 'prestasi/regu/tambah-nama-regu', element: <NamaReguAdd /> },
-          { path: 'prestasi/regu/edit/:id', element: <NamaReguEdit /> },
-          { path: 'prestasi/regu/detail/:id', element: <NamaReguDetail /> },
-          // Prestasi Regu Detail
-          { path: 'prestasi/regu/detail/:id/tambah-prestasi-siswa', element: <PrestasiReguAdd /> },
-          { path: 'prestasi/regu/detail/:id/edit/:id', element: <PrestasiReguEdit /> },
-          // Bidang Bimbingan
-          { path: 'bidang-bimbingan', element: <BidangBimbinganList /> },
-          { path: 'bidang-bimbingan/tambah-bidang-bimbingan', element: <BidangBimbinganAdd /> },
-          { path: 'bidang-bimbingan/edit/:id', element: <BidangBimbinganEdit /> },
-          // Tiket Konseling Individu
-          { path: 'tiket-konseling-individu', element: <TiketKonselingIndividuList /> },
-          { path: 'tiket-konseling-individu/konseling-edit/:id', element: <TiketKonselingIndividuEdit /> },
-          // Tiket Konsultasi Wali Siswa
-          { path: 'tiket-konsultasi', element: <TiketKonsultasiList /> },
-          { path: 'tiket-konsultasi/konsultasi-edit/:id', element: <TiketKonsultasiEdit/> },
-          // Kategori Poin
-          { path: 'kategori-poin', element: <KategoriPoinList /> },
-          { path: 'kategori-poin/tambah-kategori-poin', element: <KategoriPoinAdd /> },
-          { path: 'kategori-poin/edit/:id', element: <KategoriPoinEdit /> },
-          // Log Poin Siswa
-          { path: 'log-poin', element: <LogPoinSiswaList /> }, 
-          // Poin Siswa
-          { path: 'poin', element: <PoinSiswaList /> }, 
-          { path: 'poin/tambah-poin', element: <PoinSiswaAdd /> }, 
-          // Status Keluarga
-          { path: 'status-keluarga', element: <StatusKeluargaList /> }, 
-          { path: 'status-keluarga/tambah-status-keluarga', element: <StatusKeluargaAdd /> }, 
-          { path: 'status-keluarga/edit/:id', element: <StatusKeluargaEdit /> }, 
-          // Wali Siswa
-          { path: 'wali-siswa', element: <WaliSiswaList /> },
-          // Users
-          { path: 'users', element: <UsersList /> },
-          { path: 'users/edit/:id', element: <UsersEdit /> },
-        ],
-      },
-      {
-        path: 'dashboard/siswa',
-        element: <ProtectedRoute allowedRoles={['siswa']} />,
-        children: [
-          { path: '', element: <DashboardSiswa /> },
-          { path: 'prestasi', element: <PrestasiIndividuSiswaList /> },
-          { path: 'konseling-individu', element: <KonselingIndividuSiswaList /> },
-          { path: 'konseling-individu/tambah-konseling-individu', element: <KonselingIndividuSiswaAdd /> },
-          { path: 'catatan-konseling', element: <CatatanKonseling /> },
-          { path: 'account-settings', element: <AccountSettingSiswa /> },
-        ],
-      },
-      {
-        path: 'dashboard/guru',
-        element: <ProtectedRoute allowedRoles={['guru']} />,
-        children: [
-          { path: '', element: <DashboardGuru /> },
-        ],
-      },
-      {
-        path: 'dashboard/wali-siswa',
-        element: <ProtectedRoute allowedRoles={['wali siswa']} />,
-        children: [
-          { path: '', element: <DashboardWaliSiswa /> },
-          { path: 'konsultasi', element: <KonsultasiWaliSiswaList/> },
-          { path: 'konsultasi/tambah-konsultasi', element: <KonsultasiWaliSiswaAdd/> },
+          { path: 'wali-kelas', element: <WaliKelasList/> },
+          { path: 'wali-kelas/tambah-wali-kelas', element: <WaliKelasAdd/> },
+          { path: 'wali-kelas/edit/:id', element: <WaliKelasEdit/> },
+          // Guru Mata Pelajaran
+          { path: 'guru-mapel', element: <GuruMapelList/> },
+          { path: 'guru-mapel/tambah-guru-mapel', element: <GuruMapelAdd/> },
+          { path: 'guru-mapel/edit/:id', element: <GuruMapelEdit/> },
+          // Hari
+          { path: 'hari', element: <HariList/> },
+          { path: 'hari/tambah-hari', element: <HariAdd/> },
+          { path: 'hari/edit/:id', element: <HariEdit/> },
+          // Waktu/Jam
+          { path: 'waktu', element: <WaktuList/> },
+          { path: 'waktu/tambah-waktu', element: <WaktuAdd/> },
+          { path: 'waktu/tambah-clone', element: <CloneWaktu/> },
+          { path: 'waktu/edit/:id', element: <WaktuEdit/> },
+          // Kategori Waktu
+          { path: 'kategori-waktu', element: <KategoriWaktuList/> },
+          { path: 'kategori-waktu/tambah-kategori', element: <KategoriWaktuAdd/> },
+          { path: 'kategori-waktu/edit/:id', element: <KategoriWaktuEdit/> },
+          // Jadwal Mapel
+          { path: 'jadwal-mapel', element: <JadwalMapelList/> },
+          { path: 'jadwal-mapel/tambah-jadwal', element: <JadwalMapelAdd/> },
+          // User Admin
+          { path: 'user-admin', element: <UserAdminList/> },
+          { path: 'user-admin/tambah', element: <UserAdminAdd/> },
+          // User Guru
+          { path: 'user-guru', element: <UserGuruList/> },
+          // User Staf
+          { path: 'user-staf', element: <UserStafList/> },
+          // User Siswa
+          { path: 'user-siswa', element: <UserSiswaList/> },
+          // Siswa
+          { path: 'siswa', element: <SiswaList/> },
+          { path: 'siswa/tambah', element: <SiswaAdd/> },
+          // Status Kehadiran
+          { path: 'status-kehadiran', element: <StatusKehadiranList/> }, 
+          { path: 'status-kehadiran/tambah', element: <StatusKehadiranAdd/> }, 
+          { path: 'status-kehadiran/edit/:id', element: <StatusKehadiranEdit/> },
+          // Generate QR Code
+          { path: 'generate-student-card', element: <QrCodeGenerateList/> }, 
+          // Absensi
+          { path: 'absensi', element: <QrCodeScanView/> },
+          { path: 'absensi-siswa', element: <AbsensiList/> },
+          { path: 'absensi-siswa/tambah', element: <AbsensiAdd/> },   
+          // Rekap Absensi
+          { path: 'rekap-absensi', element: <RekapAbsensiList/> }, 
+
+          // Pengaturan Jam
+          { path: 'pengaturan-jam', element: <PengaturanJamList/> },
+          { path: 'pengaturan-jam/edit/:id', element: <PengaturanJamEdit/> },
+          
         ],
       },
     ],
@@ -229,218 +257,3 @@ const Router = [
 ];
 
 export default Router;
-
-
-// import React, { lazy } from 'react';
-// import { Navigate } from 'react-router-dom';
-// import ProtectedRoute from 'src/components/protectedRoutes/protectedRoute';
-// import Loadable from '../layouts/full/shared/loadable/Loadable';
-
-// /* ***Layouts**** */
-// const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
-// const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')));
-
-// /* ****Dashboards***** */
-// const DashboardAdmin = Loadable(lazy(() => import('../views/dashboard/Admin')));
-// const DashboardSiswa = Loadable(lazy(() => import('../views/dashboard/Siswa')));
-// const DashboardGuru = Loadable(lazy(() => import('../views/dashboard/Guru')));
-
-// // /* ****Dashboard Admin***** */
-// // const Chats = Loadable(lazy(() => import('../views/apps/chat/Chat')));
-// // const Notes = Loadable(lazy(() => import('../views/apps/notes/Notes')));
-// // const Calendar = Loadable(lazy(() => import('../views/apps/calendar/BigCalendar')));
-// // const Tickets = Loadable(lazy(() => import('../views/apps/tickets/Tickets')));
-// // const UserProfile = Loadable(lazy(() => import('../views/apps/user-profile/UserProfile')));
-// // const Gallery = Loadable(lazy(() => import('../views/apps/user-profile/Gallery')));
-// // Siswa
-// const StudentList = Loadable(lazy(() => import('../views/apps/siswa/SiswaList')));
-// const StudentEdit = Loadable(lazy(() => import('../views/apps/siswa/SiswaEdit')));
-// // Konselor
-// const KonselorAdd = Loadable(lazy(() => import ('../views/apps/konselor/KonselorAdd')))
-// const KonselorList = Loadable(lazy(() => import ('../views/apps/konselor/KonselorList')));
-// const KonselorEdit = Loadable(lazy(() => import ('../views/apps/konselor/KonselorEdit')));
-// // Pelanggaran
-// const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')));
-// const PelanggaranAdd = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranAdd')));
-// const PelanggaranEdit = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranEdit')));
-// // Kelas
-// const KelasList = Loadable(lazy(() => import ('../views/apps/kelas/KelasList')));
-// const KelasAdd = Loadable(lazy(() => import ('../views/apps/kelas/KelasAdd')));
-// const KelasEdit = Loadable(lazy(() => import ('../views/apps/kelas/KelasEdit')));
-// const KelasDetail = Loadable(lazy(() => import ('../views/apps/kelas/KelasDetail')));
-// // // Wali Kelas
-// const WaliKelasList = Loadable(lazy(() => import ('../views/apps/waliKelas/WaliKelasList')));
-// const WaliKelasAdd = Loadable(lazy(() => import ('../views/apps/waliKelas/WaliKelasAdd')));
-// const WaliKelasEdit = Loadable(lazy(() => import ('../views/apps/waliKelas/WaliKelasEdit')));
-// // // Prestasi Madrasah
-// const PrestasiMadrasahList = Loadable(lazy(() => import ('../views/apps/prestasiMadrasah/PrestasiMadrasahList')));
-// const PrestasiMadrasahAdd = Loadable(lazy(() => import ('../views/apps/prestasiMadrasah/PrestasiMadrasahAdd')));
-// const PrestasiMadrasahEdit = Loadable(lazy(() => import ('../views/apps/prestasiMadrasah/PrestasiMadrasahEdit')));
-// // // Prestasi Individu
-// const PrestasiIndividuList = Loadable(lazy(() => import ('../views/apps/prestasiIndividu/prestasiIndividuList')));
-// const PrestasiIndividuAdd = Loadable(lazy(() => import ('../views/apps/prestasiIndividu/PrestasiIndividuAdd')));
-// const PrestasiIndividuEdit = Loadable(lazy(() => import ('../views/apps/prestasiIndividu/PrestasiIndividuEdit')));
-// // // Nama Regu
-// const NamaReguList = Loadable(lazy(() => import ('../views/apps/prestasiRegu/NamaReguList')));
-// const NamaReguAdd = Loadable(lazy(() => import ('../views/apps/prestasiRegu/NamaReguAdd')));
-// const NamaReguEdit = Loadable(lazy(() => import ('../views/apps/prestasiRegu/NamaReguEdit')));
-// const NamaReguDetail = Loadable(lazy(() => import ('../views/apps/prestasiRegu/NamaReguDetail')));
-// // // Detail Prestasi Regu
-// const PrestasiReguAdd = Loadable(lazy(() => import ('../views/apps/prestasiRegu/detail prestasi siswa/AddDetailPrestasiSiswa')));
-// const PrestasiReguEdit = Loadable(lazy(() => import ('../views/apps/prestasiRegu/detail prestasi siswa/EditDetailPrestasiSiswa')));
-// // // Bidang Bimbingan
-// const BidangBimbinganList = Loadable(lazy(() => import ('../views/apps/bimbingan/BidangBimbinganList')));
-// const BidangBimbinganAdd = Loadable(lazy(() => import ('../views/apps/bimbingan/BidangBimbinganAdd')));
-// const BidangBimbinganEdit = Loadable(lazy(() => import ('../views/apps/bimbingan/BidangBimbinganEdit')));
-// // // Tiket Konseling Individu
-// const TiketKonselingIndividuList = Loadable(lazy(() => import ('../views/apps/tiketKonseling/TiketKonselingIndividuList')));
-// const TiketKonselingIndividuEdit = Loadable(lazy(() => import ('../views/apps/tiketKonseling/TiketKonselingIndividuEdit')));
-// // Kategori Poin
-// const KategoriPoinList = Loadable(lazy(() => import ('../views/apps/kategoriPoin/KategoriPoinList')));
-// const KategoriPoinAdd = Loadable(lazy(() => import ('../views/apps/kategoriPoin/KategoriPoinAdd')));
-// const KategoriPoinEdit = Loadable(lazy(() => import ('../views/apps/kategoriPoin/KategoriPoinEdit')));
-// // Users
-// const UsersList = Loadable(lazy(() => import ('../views/apps/users/UsersList')));
-// const UsersEdit = Loadable(lazy(() => import ('../views/apps/users/UsersEdit')));
-
-// /* ****Dashboard Siswa***** */
-// const PrestasiIndividuSiswaList = Loadable(lazy(() => import ('../views/apps/dashboardSiswa/PrestasiIndividuSiswaList'))); 
-// const KonselingIndividuSiswaAdd = Loadable(lazy(() => import ('../views/apps/dashboardSiswa/KonselingIndividuAdd')));
-// const KonselingIndividuSiswaList = Loadable(lazy(() => import ('../views/apps/dashboardSiswa/KonselingIndividuList')));
-// const CatatanKonseling = Loadable(lazy(() => import ('../views/apps/dashboardSiswa/CatatanKonselingList')));
-
-// // Pages
-// // const AccountSetting = Loadable(lazy(() => import('../views/pages/account-setting/AccountSetting')),);
-// const AccountSettingSiswa = Loadable(lazy(() => import('../views/pages/account-setting/AccountSettingSiswa')),);
-
-
-// // authentication
-// const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login')));
-// const Register = Loadable(lazy(() => import('../views/authentication/auth1/Register')));
-// const ForgotPassword = Loadable(lazy(() => import('../views/authentication/auth1/ForgotPassword')));
-// const TwoSteps = Loadable(lazy(() => import('../views/authentication/auth1/TwoSteps')));
-// const Error = Loadable(lazy(() => import('../views/authentication/Error')));
-// const InternalError = Loadable(lazy(() => import('../views/authentication/500Error')));
-// const Forbidden = Loadable(lazy(() => import('../views/authentication/Forbidden')));
-// const Maintenance = Loadable(lazy(() => import('../views/authentication/Maintenance')));
-
-// // landingpage
-// const LandingPage = Loadable(lazy(() => import('../views/pages/landingpage/Landingpage')));
-
-
-
-// const Router = [
-//   {
-//     path: '/',
-//     element: <BlankLayout />, 
-//     children: [
-//       { path: '/', element: <LandingPage /> },
-//       { path: '/auth/404', element: <Error /> },
-//       { path: '/auth/login', element: <Login /> },
-//       { path: '/auth/register', element: <Register /> },
-//       { path: '/auth/forgot-password', element: <ForgotPassword /> },
-//       { path: '/auth/two-steps', element: <TwoSteps /> },
-//       { path: '/auth/maintenance', element: <Maintenance /> },
-//       { path: '/auth/500', element: <InternalError /> },
-//       { path: '/auth/forbidden', element: <Forbidden/> },
-//       { path: '*', element: <Navigate to="/auth/404" /> },
-//     ],
-//   },
-//   {
-//     path: '/',
-//     element: <FullLayout />,
-//     children: [
-//       {
-//         path: '/dashboard/admin',
-//         element: <ProtectedRoute allowedRoles={['admin']} />,
-//         children: [
-//           { path: '/dashboard/admin', element: <DashboardAdmin /> },
-//           // Siswa
-//           { path: 'siswa', element: <StudentList /> },
-//           { path: 'siswa/edit/:id', element: <StudentEdit /> },
-//           // Konselor
-//           { path: 'konselor', element: <KonselorList/> },
-//           { path: 'konselor/tambah-konselor', element: <KonselorAdd/> },
-//           { path: 'konselor/edit/:id', element: <KonselorEdit/> },
-//           // Pelanggaran
-//           { path: 'pelanggaran', element: <PelanggaranList/> },
-//           { path: 'pelanggaran/add-pelanggaran', element: <PelanggaranAdd/> },
-//           { path: 'pelanggaran/edit/:id', element: <PelanggaranEdit/> },
-//           // Kelas
-//           { path: 'kelas', element: <KelasList /> },
-//           { path: 'kelas/tambah-kelas', element: <KelasAdd /> },
-//           { path: 'kelas/edit/:id', element: <KelasEdit /> },
-//           { path: 'kelas/detail/:id', element: <KelasDetail /> },
-//           // Wali Kelas
-//           { path: 'wali-kelas', element: <WaliKelasList/> },
-//           { path: 'wali-kelas/tambah-wali-kelas', element: <WaliKelasAdd/> },
-//           { path: 'wali-kelas/edit/:id', element: <WaliKelasEdit/> },
-//           // Prestasi Madrasah
-//           { path: 'prestasi/madrasah', element: <PrestasiMadrasahList/> },
-//           { path: 'prestasi/madrasah/tambah-prestasi-madrasah', element: <PrestasiMadrasahAdd/> },
-//           { path: 'prestasi/madrasah/edit/:id', element: <PrestasiMadrasahEdit/> },
-//           // Prestasi Individu
-//           { path: 'prestasi/individu', element: <PrestasiIndividuList/> },
-//           { path: 'prestasi/individu/tambah-prestasi-individu', element: <PrestasiIndividuAdd/> },
-//           { path: 'prestasi/individu/edit/:id', element: <PrestasiIndividuEdit/> },
-//           // Nama Regu
-//           { path: 'prestasi/regu', element: <NamaReguList/> },
-//           { path: 'prestasi/regu/tambah-nama-regu', element: <NamaReguAdd/> },
-//           { path: 'prestasi/regu/edit/:id', element: <NamaReguEdit/> },
-//           { path: 'prestasi/regu/detail/:id', element: <NamaReguDetail/> },
-//           // Prestasi Regu Detail
-//           { path: 'prestasi/regu/detail/:id/tambah-prestasi-siswa', element: <PrestasiReguAdd/> },
-//           { path: 'prestasi/regu/detail/:id//edit/:id', element: <PrestasiReguEdit/> },
-//           // Bidang Bimbingan
-//           { path: 'bidang-bimbingan', element: <BidangBimbinganList/> },
-//           { path: 'bidang-bimbingan/tambah-bidang-bimbingan', element: <BidangBimbinganAdd/> },
-//           { path: 'bidang-bimbingan/edit/:id', element: <BidangBimbinganEdit/> },
-//           // Tiket Konseling Individu
-//           { path: 'tiket-konseling-individu', element: <TiketKonselingIndividuList/> },
-//           { path: 'tiket-konseling-individu/konseling-edit/:id', element: <TiketKonselingIndividuEdit/> },
-//           // Kategori Poin
-//           { path: 'kategori-poin', element: <KategoriPoinList/> },
-//           { path: 'kategori-poin/tambah-kategori-poin', element: <KategoriPoinAdd/> },
-//           { path: 'kategori-poin/edit/:id', element: <KategoriPoinEdit/> },
-//           // Users
-//           { path: 'users', element: <UsersList/> },
-//           { path: 'users/edit/:id', element: <UsersEdit/> },
-//         ],
-//       },
-//       // rute lain di luar dashboard/admin yang tidak dilindungi
-//     ],
-//   },
-//   {
-//     path: '/',
-//     element: <FullLayout />,
-//     children: [
-//       {
-//         path: '/dashboard/siswa',
-//         element: <ProtectedRoute allowedRoles={['siswa']} />,
-//         children: [
-//           { path: '/dashboard/siswa', element: <DashboardSiswa /> },
-//           { path: 'prestasi', element: <PrestasiIndividuSiswaList/> },
-//           { path: 'konseling-individu', element: <KonselingIndividuSiswaList/> },
-//           { path: 'konseling-individu/tambah-konseling-individu', element: <KonselingIndividuSiswaAdd/> },
-//           { path: 'catatan-konseling', element: <CatatanKonseling/> },
-//           { path: 'account-settings', element: <AccountSettingSiswa/> },
-//         ],
-//         },
-//       ],
-//     },
-//     {
-//       path: '/',
-//       element: <FullLayout />,
-//       children: [
-//         {
-//           path: '/dashboard/guru',
-//           element: <ProtectedRoute allowedRoles={['guru']} />,
-//           children: [
-//             { path: '/dashboard/siswa', element: <DashboardGuru /> },
-//           ],
-//           },
-//         ],
-//       },
-// ];
-
-// export default Router;
