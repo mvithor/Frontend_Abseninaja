@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Grid, Box, Stack, Typography } from '@mui/material';
+import { Grid, Box, Typography } from '@mui/material';
 import PageContainer from 'src/components/container/PageContainer';
 import img1 from 'src/assets/images/backgrounds/login-bg.svg';
 import Logo from 'src/layouts/full/shared/logo/Logo';
@@ -30,9 +29,7 @@ const Login = () => (
         }}
       >
         <Box position="relative">
-          <Box px={3}>
-            <Logo />
-          </Box>
+          <Box px={3}></Box>
           <Box
             alignItems="center"
             justifyContent="center"
@@ -56,44 +53,34 @@ const Login = () => (
         </Box>
       </Grid>
       <Grid
-        item
-        xs={12}
-        sm={12}
-        lg={5}
-        xl={4}
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box p={4}>
-          <AuthLogin
-            title = "Sistem Aplikasi Bimbingan Konseling Online" 
-            subtext={
-              <Typography variant="subtitle1" color="textPrimary" mb={1}>
-                 Atasi Tantangan, Capai Tujuan, dan Kuasai Keterampilan
-              </Typography>
-            }
-            subtitle={
-              <Stack direction="row" spacing={1} mt={3}>
-                <Typography color="textPrimary" variant="h6" fontWeight="500">
-                  Tidak Memiliki Akun?
-                </Typography>
-                <Typography
-                  component={Link}
-                  to="/auth/register/student"
-                  fontWeight="500"
-                  sx={{
-                    textDecoration: 'none',
-                    color: 'primary.main',
-                  }}
-                >
-                  Buat Akun Sekarang
-                </Typography>
-              </Stack>
-            }
-          />
-        </Box>
-      </Grid>
+  item
+  xs={12}
+  sm={12}
+  lg={5}
+  xl={4}
+  display="flex"
+  justifyContent="center"
+  alignItems="center"
+  sx={{
+    backgroundColor: '#ffffff', // Warna latar putih
+    height: '100vh', // Menambahkan tinggi penuh untuk menghilangkan area abu-abu
+  }}
+>
+  <Box p={4}>
+    <Box display="flex" flexDirection="column" alignItems="center" mb={2}>
+      <Logo />
+    </Box>
+    <AuthLogin
+      title="Sistem Manajemen Absensi Online QR-Code"
+      subtext={
+        <Typography variant="subtitle1" color="textPrimary" mb={1}>
+          Solusi Terintegrasi untuk Absensi dan Manajemen Akademik Sekolah
+        </Typography>
+      }
+    />
+  </Box>
+</Grid>
+
     </Grid>
   </PageContainer>
 );

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import axiosInstance from "src/utils/axiosInstance";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import axiosInstance from "src/utils/axiosInstance";
 import {
   Box,
   TextField,
@@ -12,42 +13,35 @@ import PageContainer from "src/components/container/PageContainer";
 import ParentCard from "src/components/shared/ParentCard";
 import KelasTableDetail from "src/components/apps/kelas/kelasDetail/KelasTableDetail";
 
+const fetchStudentsByClass = async (id) => {
+  const response = await axiosInstance.get(`/kelas/detail/${id}`);
+  return response.data;
+};
+
 const KelasDetailList = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    const fetchStudents = async () => {
-      try {
-        const responseStudent = await axiosInstance.get(`/kelas/detail/${id}`);
-        setStudents(responseStudent.data);
-      } catch (error) {
-        if (error.response && error.response.data && error.response.data.msg) {
-          setError(error.response.data.msg);
-        } else {
-          setError("Terjadi kesalahan saat memuat data");
-        }
-      } finally {
-        setTimeout(() => {
-          setError("");
-        }, 3000);
-      }
-    };
-
-    fetchStudents();
-  }, [id]);
+  const { data: students = [], isError, error: queryError } = useQuery({
+    queryKey: ['students', id],
+    queryFn: () => fetchStudentsByClass(id),
+    onError: (error) => {
+      const errorMessage = error.response?.data?.msg || "Terjadi kesalahan saat memuat data";
+      setError(errorMessage);
+      setTimeout(() => setError(""), 3000);
+    }
+  });
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
   const filteredStudents = students.filter((student) =>
-    student.student_name && student.student_name.toLowerCase().includes(searchQuery.toLowerCase())
+    student.student_name?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const handleCancel = () => {
@@ -57,7 +51,7 @@ const KelasDetailList = () => {
   return (
     <PageContainer title="Detail Kelas" description="Detail kelas">
       <BreadcrumbKelasDetail />
-      <Alerts error={error}/>
+      <Alerts error={error || (isError && queryError?.message)} />
       <ParentCard title="Detail Kelas">
         <Box 
           sx={{
@@ -79,13 +73,13 @@ const KelasDetailList = () => {
           />
         </Box>
        
-          <KelasTableDetail
-            students={filteredStudents}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            handleChangePage={setPage}
-            handleChangeRowsPerPage={setRowsPerPage}
-          />
+        <KelasTableDetail
+          students={filteredStudents}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          handleChangePage={setPage}
+          handleChangeRowsPerPage={setRowsPerPage}
+        />
         
         <Box sx={{ display: 'flex', justifyContent: 'flex-start', pt: 3 }}>
           <Button

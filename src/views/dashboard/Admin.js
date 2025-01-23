@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
-import TopCards from '../../components/dashboards/TopCards';
+// import TopCards from '../../components/dashboards/TopCards';
 import WelcomeCard from 'src/components/dashboards/WelcomeCard';
-import EmployeeSalary from '../../components/dashboards/EmployeeSalary';
-import TopPerformers from '../../components/dashboards/TopPerformers';
+// import EmployeeSalary from '../../components/dashboards/EmployeeSalary';
+// import TopPerformers from '../../components/dashboards/TopPerformers';
 
 const Admin = () => {
   return (
@@ -11,9 +11,9 @@ const Admin = () => {
       <Grid container spacing={3}>
         <Grid item sm={12} lg={12}>
           <WelcomeCard />
-          <TopCards />
+          {/* <TopCards /> */}
         </Grid>
-        <Grid item xs={12} lg={8}>
+        {/* <Grid item xs={12} lg={8}>
         <TopPerformers />
           
         </Grid>
@@ -37,7 +37,7 @@ const Admin = () => {
           </Grid>
         </Grid>
         <Grid item xs={12} lg={4}>
-        </Grid>
+        </Grid> */}
       </Grid>
     </Box>
   );
