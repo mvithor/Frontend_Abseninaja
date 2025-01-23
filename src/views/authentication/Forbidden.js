@@ -10,10 +10,10 @@ const Forbidden = () => {
     // Menentukan path redirect berdasarkan role pengguna
     const getRedirectPath = () => {
         switch (role) {
-            case 'admin':
+            case 'super admin':
                 return '/dashboard/admin';
-            case 'siswa':
-                return '/dashboard/siswa';
+            case 'admin sekolah':
+                return '/dashboard/admin-sekolah';
             default:
                 return '/';
         }
@@ -22,9 +22,9 @@ const Forbidden = () => {
     // Menentukan pesan Forbidden berdasarkan role pengguna
     const getMessage = () => {
         switch (role) {
-            case 'admin':
+            case 'super admin':
                 return 'Anda tidak memiliki izin untuk mengakses halaman ini. Silakan kembali ke dashboard admin.';
-            case 'siswa':
+            case 'admin sekolah':
                 return 'Anda tidak memiliki izin untuk mengakses halaman ini. Silakan kembali ke dashboard siswa.';
             default:
                 return 'Anda tidak memiliki izin untuk mengakses halaman ini.';

@@ -10,12 +10,12 @@ const Error = () => {
   // Menentukan rute kembali berdasarkan peran pengguna
   const getRedirectPath = () => {
     switch (role) {
-      case 'admin':
+      case 'super admin':
         return '/dashboard/admin'; // Ganti dengan rute dashboard admin yang sesuai
-      case 'siswa':
-        return '/dashboard/siswa'; // Ganti dengan rute dashboard siswa yang sesuai
+      case 'admin sekolah':
+        return '/dashboard/admin-sekolah'; // Ganti dengan rute dashboard siswa yang sesuai
       default:
-        return '/dashboards/modern'; // Rute default jika peran tidak dikenali
+        return '/'; // Rute default jika peran tidak dikenali
     }
   };
 

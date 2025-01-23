@@ -4,7 +4,7 @@ import { setUser, clearUser } from 'src/store/apps/user/userSlice';
 import {jwtDecode} from 'jwt-decode';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:4000',
+  baseURL: 'http://108.136.56.78/',
   timeout: 10000,
   withCredentials: true, // Kirim cookie untuk autentikasi
 });
