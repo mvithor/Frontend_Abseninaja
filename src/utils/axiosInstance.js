@@ -4,7 +4,7 @@ import { setUser, clearUser } from 'src/store/apps/user/userSlice';
 import {jwtDecode} from 'jwt-decode';
 
 const axiosInstance = axios.create({
-  baseURL: 'http://108.136.56.78/',
+  baseURL: 'https://api.abseninaja.com',
   timeout: 10000,
   withCredentials: true, // Kirim cookie untuk autentikasi
 });
@@ -16,14 +16,12 @@ axiosInstance.interceptors.request.use(
     const token = state.user.accessToken;
 
     if (token) {
-      console.log('Access Token yang dikirim:', token);
       try {
-        const decodedToken = jwtDecode(token); // Decode token untuk validasi
+        const decodedToken = jwtDecode(token); 
         const currentTime = Math.floor(Date.now() / 1000);
 
         // Periksa apakah token sudah kadaluarsa
         if (decodedToken.exp < currentTime) {
-          console.warn('Token telah kadaluarsa. Silakan login ulang.');
           store.dispatch(clearUser());
           window.location.href = '/auth/login';
           return Promise.reject(new Error('Token expired.'));
@@ -31,11 +29,10 @@ axiosInstance.interceptors.request.use(
 
         // Tambahkan token ke header
         config.headers['Authorization'] = `Bearer ${token}`;
-        config.headers['x-user-id'] = decodedToken.userId; // Contoh pemanfaatan decodedToken
+        config.headers['x-user-id'] = decodedToken.userId; 
       } catch (error) {
-        console.error('Error saat memproses token:', error.message);
         store.dispatch(clearUser());
-        window.location.href = '/auth/login';
+        window.location.href = '/';
         return Promise.reject(new Error('Invalid token.'));
       }
     }
@@ -54,20 +51,17 @@ axiosInstance.interceptors.response.use(
     // Jika backend mengirimkan token baru melalui header `x-access-token`
     const newToken = response.headers['x-access-token'];
     if (newToken) {
-      console.log('Token baru diterima:', newToken);
       try {
         const decodedToken = jwtDecode(newToken); // Decode token baru
-
         // Perbarui token di Redux state
         store.dispatch(
           setUser({
-            name: decodedToken.name, // Ambil data user dari token baru
+            name: decodedToken.name, 
             role: decodedToken.role,
             userId: decodedToken.userId,
             accessToken: newToken,
           })
         );
-        console.log('Token berhasil diperbarui di Redux state.');
       } catch (error) {
         console.error('Error saat memproses token baru:', error.message);
       }
@@ -76,9 +70,8 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response?.status === 401) {
-      console.warn('Unauthorized: Token tidak valid atau sudah kadaluarsa.');
       store.dispatch(clearUser());
-      window.location.href = '/auth/login';
+      window.location.href = '/';
     }
 
     console.error('Response Error:', error.message);
