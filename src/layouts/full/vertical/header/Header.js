@@ -7,8 +7,8 @@ import { IconMenu2 } from '@tabler/icons';
 // components
 import Notifications from './Notifications';
 import SearchAdminSekolah from './SearchAdminSekolah';
-import ProfileAdmin from './ProfileAdmin';
-import ProfileSiswa from './ProfileSiswa';
+import ProfileSuperAdmin from './ProfileAdmin';
+import ProfileAdminSekolah from './ProfileAdminSekolah';
 
 const Header = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
@@ -56,7 +56,7 @@ const Header = () => {
 
           {/* Wrapper untuk Search agar tidak terlalu lebar */}
           {role === 'admin sekolah' && (
-            <Box sx={{ flexGrow: 1, maxWidth: '300px' }}> {/* Batasi max width untuk search */}
+            <Box sx={{ flexGrow: 1, maxWidth: '300px',  width: '100%' }}> {/* Batasi max width untuk search */}
               <SearchAdminSekolah />
             </Box>
           )}
@@ -65,9 +65,9 @@ const Header = () => {
         {/* ------------------------------------------- */}
         {/* Profil dan Notifications di sebelah kanan */}
         {/* ------------------------------------------- */}
-        <Stack spacing={1} direction="row" alignItems="center">
+        <Stack spacing={0} direction="row" alignItems="center">
           <Notifications />
-          {role === 'admin' ? <ProfileAdmin /> : <ProfileSiswa />}
+          {role === 'super admin' ? <ProfileSuperAdmin /> : <ProfileAdminSekolah />}
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>

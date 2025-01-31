@@ -47,7 +47,8 @@ const SearchAdminSekolah = () => {
           bgcolor: theme.palette.mode === 'dark' ? 'transparent' : '#f5f5f5', // Background light abu-abu, dark transparan
           borderRadius: '8px',
           padding: '4px 12px',
-          width: '250px',
+          width: '100%', // Lebar penuh secara default
+          maxWidth: { xs: '200px', sm: '250px', md: '300px' }, 
           border: theme.palette.mode === 'dark' ? `1px solid ${theme.palette.grey[500]}` : 'none', // Outline hanya di dark mode
         }}
       >

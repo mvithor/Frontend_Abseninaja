@@ -1,22 +1,36 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from 'src/utils/axiosInstance';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { persistor } from 'src/store/Store';
+import { clearUser } from 'src/store/apps/user/userSlice';
 import { Box, Menu, Avatar, Typography, Divider, Button, IconButton } from '@mui/material';
 import * as dropdownData from './data';
-
 import { IconMail } from '@tabler/icons';
 import { Stack } from '@mui/system';
-
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 import Scrollbar from 'src/components/custom-scroll/Scrollbar';
 
-const ProfileAdmin = () => {
+
+const ProfileSuperAdmin = () => {
+  const user = useSelector((state) => state.user)
   const [anchorEl2, setAnchorEl2] = useState(null);
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken');
-    navigate('/auth/login')
-  }
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.delete('/api/v1/logout');
+  
+      localStorage.clear();
+      window.sessionStorage.clear(); 
+      dispatch(clearUser()); 
+      await persistor.purge(); 
+      navigate('/'); 
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
@@ -62,6 +76,7 @@ const ProfileAdmin = () => {
         sx={{
           '& .MuiMenu-paper': {
             width: '360px',
+            mt: 2
           },
         }}
       >
@@ -72,10 +87,10 @@ const ProfileAdmin = () => {
               <Avatar src={ProfileImg} alt={ProfileImg} sx={{ width: 95, height: 95 }} />
               <Box>
                 <Typography variant="subtitle2" color="textPrimary" fontWeight={600}>
-                  Mathew Anderson
+                {user?.name || 'Guest'}
                 </Typography>
                 <Typography variant="subtitle2" color="textSecondary">
-                  Designer
+                {user?.role || 'User'}
                 </Typography>
                 <Typography
                   variant="subtitle2"
@@ -85,7 +100,7 @@ const ProfileAdmin = () => {
                   gap={1}
                 >
                   <IconMail width={15} height={15} />
-                  info@modernize.com
+                  {user?.email || 'User'}
                 </Typography>
               </Box>
             </Stack>
@@ -159,4 +174,4 @@ const ProfileAdmin = () => {
   );
 };
 
-export default ProfileAdmin;
+export default ProfileSuperAdmin;
