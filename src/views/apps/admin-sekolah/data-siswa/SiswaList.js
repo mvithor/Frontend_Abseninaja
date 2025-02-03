@@ -10,6 +10,7 @@ import {
   CircularProgress
 } from "@mui/material";
 import { IconPlus } from "@tabler/icons";
+import { validate as isUUID } from "uuid";
 import Alerts from "src/components/alerts/Alerts";
 import AddButton from "src/components/buttonGroup/AddButton";
 import SearchButton from "src/components/buttonGroup/SearchButton";
@@ -96,6 +97,9 @@ const SiswaList = () => {
     }
 
     const handleEdit = (id) => {
+        if (!id || !isUUID(id)) {
+            return;
+        }
         navigate(`/dashboard/admin-sekolah/siswa/edit/${id}`);
     };
 

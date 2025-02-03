@@ -90,6 +90,7 @@ const UserAdminList = Loadable(lazy(() => import('../views/apps/admin-sekolah/us
 const UserAdminAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/user-admin/UserAdminAdd')));
 // Data Siswa
 const SiswaList = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-siswa/SiswaList')));
+const SiswaEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-siswa/SiswaEdit')));
 const SiswaAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/data-siswa/SiswaAdd')));
 // Status kehadiran
 const StatusKehadiranList = Loadable(lazy(() => import('../views/apps/admin-sekolah/status-kehadiran/StatusKehadiranList')));
@@ -232,6 +233,7 @@ const Router = [
           { path: 'user-siswa', element: <UserSiswaList/> },
           // Siswa
           { path: 'siswa', element: <SiswaList/> },
+          { path: 'siswa/edit/:id', element: <SiswaEdit/> },
           { path: 'siswa/tambah', element: <SiswaAdd/> },
           // Status Kehadiran
           { path: 'status-kehadiran', element: <StatusKehadiranList/> }, 

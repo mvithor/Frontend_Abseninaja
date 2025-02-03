@@ -5,7 +5,7 @@ import {jwtDecode} from 'jwt-decode';
 
 const axiosInstance = axios.create({
   baseURL: 'https://api.abseninaja.com',
-  timeout: 10000,
+  timeout: 60000,
   withCredentials: true, // Kirim cookie untuk autentikasi
 });
 

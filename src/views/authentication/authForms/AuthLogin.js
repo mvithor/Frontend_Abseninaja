@@ -14,7 +14,7 @@ import {jwtDecode} from 'jwt-decode';
 const AuthLogin = ({ title, subtitle, subtext }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [deviceId] = useState(`device-${Date.now()}`); // Generate unique device ID
+  const [deviceId] = useState(`device-${Date.now()}`); 
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
