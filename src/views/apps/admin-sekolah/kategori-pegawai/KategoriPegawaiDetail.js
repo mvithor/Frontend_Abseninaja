@@ -22,7 +22,7 @@ import KategoriPegawaiTableDetail from "src/apps/admin-sekolah/kategori-pegawai/
 
 const fetchSubKategoriByKategori = async (id) => {
   try {
-    const response = await axiosInstance.get(`api/v1/kategori-pegawai/${id}/subkategori`);
+    const response = await axiosInstance.get(`/api/v1/kategori-pegawai/${id}/subkategori`);
     return response.data.data;
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
@@ -57,7 +57,7 @@ const KategoriPegawaiDetailList = () => {
   // Mutation untuk menghapus data sub-kategori pegawai
   const deleteMutation = useMutation({
     mutationFn: async (subKategoriId) => {
-      return await axiosInstance.delete(`api/v1/kategori-pegawai/${id}/subkategori/${subKategoriId}`);
+      return await axiosInstance.delete(`/api/v1/kategori-pegawai/${id}/subkategori/${subKategoriId}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['subKategoriPegawai', id]);

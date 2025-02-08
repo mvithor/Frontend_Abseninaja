@@ -52,6 +52,7 @@ const TingkatEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/ting
 const KelasList = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasList')));
 const KelasAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasAdd')));
 const KelasEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasEdit')));
+const KelasDetail = Loadable(lazy(() => import('../views/apps/admin-sekolah/kelas/KelasDetail')));
 // Wali Kelas
 const WaliKelasList = Loadable(lazy(() => import('../views/apps/admin-sekolah/wali-kelas/WaliKelasList')));
 const WaliKelasAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/wali-kelas/WaliKelasAdd')));
@@ -198,6 +199,7 @@ const Router = [
           { path: 'kelas', element: <KelasList/> },
           { path: 'kelas/tambah-kelas', element: <KelasAdd/> },
           { path: 'kelas/edit/:id', element: <KelasEdit/> },
+          { path: 'kelas/detail/:id', element: <KelasDetail/> },
           // Wali Kelas
           { path: 'wali-kelas', element: <WaliKelasList/> },
           { path: 'wali-kelas/tambah-wali-kelas', element: <WaliKelasAdd/> },

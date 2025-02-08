@@ -16,7 +16,7 @@ import {
   Paper,
   CircularProgress
 } from '@mui/material';
-import { IconEdit, IconTrash } from '@tabler/icons';
+import { IconEdit, IconTrash, IconEye } from '@tabler/icons';
 import TablePaginationActions from 'src/components/table-paginations-action/TablePagination';
 
 const KelasTable = ({
@@ -27,6 +27,7 @@ const KelasTable = ({
     handleChangeRowsPerPage,
     handleEdit,
     handleDelete,
+    handleDetail,
     isLoading,
     isError,
     errorMessage
@@ -120,6 +121,11 @@ const KelasTable = ({
                   </TableCell>
                   <TableCell align="center">
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Tooltip title="Detail" placement="bottom">
+                        <IconButton onClick={() => handleDetail(item.id)}>
+                          <IconEye width={18} />
+                        </IconButton>
+                      </Tooltip>
                       <Tooltip title="Edit" placement="bottom">
                         <IconButton onClick={() => handleEdit(item.id)}>
                           <IconEdit width={18} />
@@ -163,6 +169,7 @@ KelasTable.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
   handleChangePage: PropTypes.func.isRequired,
   handleChangeRowsPerPage: PropTypes.func.isRequired,
+  handleDetail: PropTypes.func.isRequired,
   handleEdit: PropTypes.func.isRequired,
   handleDelete: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
