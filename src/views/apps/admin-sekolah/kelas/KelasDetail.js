@@ -58,10 +58,11 @@ const KelasDetail = () => {
     };
 
     const filteredKelasBySiswa = dataKelasDetail
-        .filter((dataKelasDetail) => 
-          dataKelasDetail.User.name.toLowerCase().includes(searchQuery.toLowerCase())
-        )
-        .sort((a, b) => a.User.name.localeCompare(b.User.name));
+    .filter((dataKelasDetail) => 
+      dataKelasDetail.User?.name?.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .sort((a, b) => (a.User?.name || "").localeCompare(b.User?.name || ""));
+
         
     const handleCancel = () => {
         navigate(-1);

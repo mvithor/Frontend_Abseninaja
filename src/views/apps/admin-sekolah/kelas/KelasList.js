@@ -139,6 +139,10 @@ const KelasList = () => {
         navigate(`/dashboard/admin-sekolah/kelas/edit/${id}`)
     };
 
+    const handleDetail = (id) => {
+        navigate(`/dashboard/admin-sekolah/kelas/detail/${id}`)
+    }
+
     const handleDelete = () => {
         if(!deleteKelas) {
             setError("Kelas tidak ditemukan");
@@ -198,6 +202,7 @@ const KelasList = () => {
                     rowsPerPage={rowsPerPage}
                     handleChangePage={handleChangePage}
                     handleChangeRowsPerPage={handleRowsPerPageChange}
+                    handleDetail={handleDetail}
                     handleEdit={handleEdit}
                     handleDelete={handleOpenConfirmDialog}
                     isLoading={isLoading}
