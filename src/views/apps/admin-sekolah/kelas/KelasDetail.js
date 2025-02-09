@@ -14,7 +14,7 @@ const fetchKelasBySiswa = async (id) => {
     try {
         const response = await axiosInstance.get(`/api/v2/siswa-kelas/${id}`);
         return {
-            nama_kelas: response.data.nama_kelas, // Pastikan API mengembalikan nama kelas
+            nama_kelas: response.data.nama_kelas, 
             siswa: response.data.data
         };
     } catch (error) {
@@ -44,8 +44,8 @@ const KelasDetail = () => {
         }
     });
     
-    const namaKelas = data?.nama_kelas || "Tidak Diketahui"; // Nama kelas, default jika tidak ada
-    const dataKelasDetail = data?.siswa || []; // Data siswa
+    const namaKelas = data?.nama_kelas || "Tidak Diketahui"; 
+    const dataKelasDetail = data?.siswa || []; 
     
 
     const handleSearchChange = (event) => {

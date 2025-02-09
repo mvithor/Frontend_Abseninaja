@@ -25,6 +25,7 @@ import ParentCard from "src/components/shared/ParentCard";
 import StatistikAbsensiCards from "src/components/dashboardsAdminSekolah/StatistikAbsensiCards";
 import AbsensiTable from "src/apps/admin-sekolah/absensi/AbsensiTable";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment-timezone";
 import axiosInstance from "src/utils/axiosInstance";
 
 const fetchAbsensi = async ({ queryKey }) => {
@@ -41,7 +42,7 @@ const fetchAbsensi = async ({ queryKey }) => {
 const fetchKelasList = async () => {
   try {
     const response = await axiosInstance.get("/api/v1/dropdown/kelas");
-    return response.data.data; // Backend harus mengembalikan format: [{ id, nama_kelas }]
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching kelas list:", error);
     return [];
@@ -72,11 +73,14 @@ const AbsensiList = () => {
   }, []);
 
   const { data: absensi = [], isLoading, isError, error: queryError, refetch } = useQuery({
-    queryKey: ["absensi", {
-      tanggal_mulai: filters.tanggal_mulai?.toISOString().split("T")[0],
-      tanggal_akhir: filters.tanggal_akhir?.toISOString().split("T")[0],
-      kelas_id: filters.kelas_id,
-    }],
+    queryKey: [
+      "absensi",
+      {
+        tanggal_mulai: moment(filters.tanggal_mulai).tz("Asia/Jakarta").format("YYYY-MM-DD"),
+        tanggal_akhir: moment(filters.tanggal_akhir).tz("Asia/Jakarta").format("YYYY-MM-DD"),
+        kelas_id: filters.kelas_id,
+      },
+    ],
     queryFn: fetchAbsensi,
     onError: (error) => {
       const errorMessage = error.response?.data?.msg || "Terjadi kesalahan saat memuat data";
@@ -114,6 +118,10 @@ const AbsensiList = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+
+  const handleEdit = (id) => {
+    navigate(`/dashboard/admin-sekolah/absensi-siswa/edit/${id}`)
+};
 
   const handleFilterClick = () => {
     setFilterOpen(true);
@@ -163,6 +171,7 @@ const AbsensiList = () => {
           handleAdd={handleAdd}
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
+          handleEdit={handleEdit}
           handleChangeRowsPerPage={handleRowsPerPageChange}
           isLoading={isLoading}
           isError={isError}
@@ -176,17 +185,22 @@ const AbsensiList = () => {
             Tanggal Mulai
           </CustomFormLabel>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              renderInput={(props) => (
-                <CustomTextField
-                  {...props}
-                  fullWidth
-                  size="medium"
-                />
-              )}
-              value={filters.tanggal_mulai}
-              onChange={(newValue) => setFilters({ ...filters, tanggal_mulai: newValue })}
-            />
+          <DatePicker
+            renderInput={(props) => (
+              <CustomTextField
+                {...props}
+                fullWidth
+                size="medium"
+              />
+            )}
+            value={filters.tanggal_mulai}
+            onChange={(newValue) =>
+              setFilters((prevFilters) => ({
+                ...prevFilters,
+                tanggal_mulai: moment(newValue).tz("Asia/Jakarta").toDate(),
+              }))
+            }
+          />
           </LocalizationProvider>
           <CustomFormLabel htmlFor="tanggal_akhir" sx={{ mt: 1.85 }}>
             Tanggal Akhir
@@ -201,7 +215,12 @@ const AbsensiList = () => {
                 />
               )}
               value={filters.tanggal_akhir}
-              onChange={(newValue) => setFilters({ ...filters, tanggal_akhir: newValue })}
+              onChange={(newValue) =>
+                setFilters((prevFilters) => ({
+                  ...prevFilters,
+                  tanggal_akhir: moment(newValue).tz("Asia/Jakarta").toDate(),
+                }))
+              }
             />
           </LocalizationProvider>
           <CustomFormLabel htmlFor="kelas_id" sx={{ mt: 1.85 }}>

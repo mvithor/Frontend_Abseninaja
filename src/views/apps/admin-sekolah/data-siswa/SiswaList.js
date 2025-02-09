@@ -1,14 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Typography,
-  Dialog,
-  DialogContent,
-  DialogActions,
-  Button,
-  CircularProgress
-} from "@mui/material";
+import { Box } from "@mui/material";
 import { IconPlus } from "@tabler/icons";
 import { validate as isUUID } from "uuid";
 import Alerts from "src/components/alerts/Alerts";
@@ -18,7 +10,7 @@ import FilterButton from "src/components/buttonGroup/FilterButton";
 import PageContainer from "src/components/container/PageContainer";
 import ParentCard from "src/components/shared/ParentCard";
 import SiswaTable from "src/apps/admin-sekolah/data-siswa/List/SiswaTable";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "src/utils/axiosInstance";
 
 const fetchSiswa = async () => {
@@ -39,10 +31,7 @@ const SiswaList = () => {
     const [searchQuery, setSearchQuery] = useState("");
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
-    const [deleteSiswa, setDeleteSiswa] = useState(null);
-    const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
 
     const { data: siswa = [], isLoading, isError, error: queryError } = useQuery({
         queryKey: ['siswa'],
@@ -50,31 +39,6 @@ const SiswaList = () => {
         onError: (error) => {
             const errorMessage = error.response?.data?.msg || "Terjadi kesalahan saat memuat data";
             setError(errorMessage);
-        }
-    });
-
-    const deleteMutation = useMutation({
-        mutationFn: async (id) => {
-            const response = await axiosInstance.delete(`/api/v1/siswa/${id}`);
-            return response.data; 
-        },
-        onSuccess: (data) => {
-            queryClient.invalidateQueries(['siswa']); 
-            setSuccess(data.msg || "Data siswa berhasil dihapus"); 
-            setTimeout(() => {
-                setSuccess("");
-            }, 3000);
-        },
-        onError: (error) => {
-            const errorDetails = error.response?.data?.errors || []; 
-            const errorMsg = error.response?.data?.msg || 'Terjadi kesalahan saat menghapus data siswa';
-            if (errorDetails.length > 0) {
-                setError(errorDetails.join(', '));
-            } else {
-                setError(errorMsg);
-            }
-            setSuccess('');
-            setTimeout(() => setError(''), 3000); 
         }
     });
 
@@ -101,27 +65,10 @@ const SiswaList = () => {
             return;
         }
         navigate(`/dashboard/admin-sekolah/siswa/edit/${id}`);
+        setSuccess("Data siswa berhasil diperbarui");  
+        setTimeout(() => setSuccess(""), 3000);
     };
-
-    const handleDelete = async () => {
-        if (!deleteSiswa) {
-            setError("Data siswa tidak ditemukan");
-            return;
-        }
-        deleteMutation.mutate(deleteSiswa);
-        setConfirmDialogOpen(false);
-        setDeleteSiswa(null);
-    };
-
-    const handleOpenConfirmDialog = (id) => {
-        setDeleteSiswa(id);
-        setConfirmDialogOpen(true);
-    };
-
-    const handleCloseConfirmDialog = () => {
-        setConfirmDialogOpen(false);
-        setDeleteSiswa(null);
-    };
+    
 
     const handleRowsPerPageChange = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
@@ -163,46 +110,11 @@ const SiswaList = () => {
                     handleChangePage={handleChangePage}
                     handleChangeRowsPerPage={handleRowsPerPageChange}
                     handleEdit={handleEdit}
-                    handleDelete={handleOpenConfirmDialog}
                     isLoading={isLoading}
                     isError={isError}
                     errorMessage={queryError?.message || "Terjadi kesalahan saat memuat data"}
                 />
             </ParentCard>
-            <Dialog
-                open={confirmDialogOpen}
-                onClose={handleCloseConfirmDialog}
-                maxWidth="sm"
-                fullWidth
-            >
-                <DialogContent>
-                <Typography variant="h5" align="center" sx={{ mt: 2, mb: 2 }}>
-                    Apakah Anda yakin ingin menghapus data siswa ?
-                </Typography>
-                </DialogContent>
-                <DialogActions sx={{ justifyContent: 'center', mb: 2 }}>
-                <Button
-                    sx={{ mr: 3 }}
-                    variant="outlined"
-                    color="secondary"
-                    onClick={handleCloseConfirmDialog}
-                >
-                    Batal
-                </Button>
-                <Button
-                    sx={{
-                    mr: 3,
-                    backgroundColor: "#F48C06",
-                    '&:hover': { backgroundColor: "#f7a944" }
-                    }}
-                    variant="contained"
-                    onClick={handleDelete}
-                    disabled={deleteMutation.isLoading}
-                >
-                    {deleteMutation.isLoading ? <CircularProgress size={24} /> : 'Hapus'}
-                </Button>
-                </DialogActions>
-            </Dialog>
         </PageContainer>
     );
 };

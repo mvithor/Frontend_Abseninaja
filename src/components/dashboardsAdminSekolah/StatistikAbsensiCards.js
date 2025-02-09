@@ -20,7 +20,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "src/utils/axiosInstance";
 
 const fetchStats = async () => {
-  const response = await axiosInstance.get("/api/v1/absensi/statistik");
+  const response = await axiosInstance.get("/api/v1/absensi-siswa/statistik");
   return response.data.data;
 };
 
@@ -46,7 +46,7 @@ const StatistikAbsensiCards = () => {
 
   const data = [
     {
-      title: "Siswa Hadir",
+      title: "Siswa Masuk",
       value: stats.Masuk || 0,
     },
     {

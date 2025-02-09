@@ -1,6 +1,7 @@
 import React from 'react';
 import MenuitemsSuperAdmin from './MenuItemsSuperAdmin';
 import MenuitemsAdminSekolah from './MenuItemsAdminSekolah';
+import MenuitemsPegawai from './MenuItemsPegawai';
 import { useLocation } from 'react-router';
 import { Box, List, useMediaQuery } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,8 +15,8 @@ const SidebarItems = () => {
   const pathDirect = pathname;
   const pathWithoutLastPart = pathname.slice(0, pathname.lastIndexOf('/'));
   const customizer = useSelector((state) => state.customizer);
-  const user = useSelector((state) => state.user); // Ambil user dari Redux store
-  const role = user ? user.role : ''; // Ambil role dari user
+  const user = useSelector((state) => state.user); 
+  const role = user ? user.role : ''; 
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const hideMenu = lgUp ? customizer.isCollapse && !customizer.isSidebarHover : '';
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ const SidebarItems = () => {
       break;
     case 'admin sekolah':
       menuItems = MenuitemsAdminSekolah;
+        break;
+    case 'pegawai':
+      menuItems = MenuitemsPegawai;
         break;
     default:
       menuItems = []; // Kosongkan menu items jika role tidak dikenali

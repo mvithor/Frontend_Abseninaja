@@ -4,6 +4,7 @@ import ProtectedRoute from 'src/components/protectedRoutes/protectedRoute';
 import Loadable from '../layouts/full/shared/loadable/Loadable';
 
 
+
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')));
@@ -22,6 +23,10 @@ const PendaftaranSekolahEdit = Loadable(lazy(() => import('../views/apps/super-a
 // Data Admin Sekolah
 const AdminSekolahList = Loadable(lazy(() => import('../views/apps/super-admin/admin-sekolah/AdminSekolahList')));
 const AdminSekolahAdd = Loadable(lazy(() => import('../views/apps/super-admin/admin-sekolah/AdminSekolahAdd')));
+
+/* ****Dashboard Pegawai***** */
+const DashboardPegawai = Loadable(lazy(() => import('../views/dashboard/Pegawai')));
+
 
 /* ****Dashboard Admin Sekolah***** */
 const DashboardAdminSekolah = Loadable(lazy(() => import('../views/dashboard/AdminSekolah')));
@@ -103,6 +108,7 @@ const QrCodeGenerateList = Loadable(lazy(() => import('../views/apps/admin-sekol
 // Absensi
 const QrCodeScanView = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/QrCodeScanView')));
 const AbsensiList = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/AbsensiList')));
+const AbsensiEdit = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/AbsensiEdit')));
 const AbsensiAdd = Loadable(lazy(() => import('../views/apps/admin-sekolah/absensi/AbsensiAdd')));
 // Rekap Absensi
 const RekapAbsensiList = Loadable(lazy(() => import('../views/apps/admin-sekolah/rekap-absensi/RekapAbsensiList')));
@@ -166,6 +172,16 @@ const Router = [
           { path: 'manajemen-sekolah/tambah-admin/:sekolah_id', element: <AdminSekolahAdd /> },
             
         ],
+      },
+      {
+        path: 'dashboard/pegawai',
+        element: <ProtectedRoute allowedRoles={['pegawai']}/>,
+        children: [
+          { path: '', element: <DashboardPegawai /> }, 
+          { path: 'scan', element: <QrCodeScanView/> },
+
+        ]
+
       },
       {
         path: 'dashboard/admin-sekolah',
@@ -246,7 +262,8 @@ const Router = [
           // Absensi
           { path: 'absensi', element: <QrCodeScanView/> },
           { path: 'absensi-siswa', element: <AbsensiList/> },
-          { path: 'absensi-siswa/tambah', element: <AbsensiAdd/> },   
+          { path: 'absensi-siswa/tambah', element: <AbsensiAdd/> },
+          { path: 'absensi-siswa/edit/:id', element: <AbsensiEdit/> },   
           // Rekap Absensi
           { path: 'rekap-absensi', element: <RekapAbsensiList/> }, 
 

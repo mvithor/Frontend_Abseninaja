@@ -26,11 +26,15 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.get('expired')) {
       console.warn('Session expired. Clearing user state.');
-      setError('Sesi anda telah berakhir. Silahkan login kembali.');
+      setError('Sesi anda telah berakhir. Silahkan login kembali');
       dispatch(clearUser());
+  
+      setTimeout(() => {
+        navigate('/'); 
+      }, 5000); 
     }
-  }, [location.search, dispatch]);
-
+  }, [location.search, dispatch, navigate]);
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
@@ -57,6 +61,9 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
             break;
           case 'admin sekolah':
             navigate('/dashboard/admin-sekolah');
+            break;
+          case 'pegawai':
+            navigate('/dashboard/pegawai');
             break;
           default:
             console.error('Invalid role:', role);

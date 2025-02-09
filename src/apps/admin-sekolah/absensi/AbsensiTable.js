@@ -7,11 +7,14 @@ import {
     TableCell,
     TablePagination,
     TableRow,
+    IconButton,
+    Tooltip,
     TableFooter,
     TableContainer,
     Paper,
     CircularProgress,
   } from '@mui/material';
+  import { IconEdit } from '@tabler/icons';
   import PropTypes from 'prop-types';
   import TablePaginationActions from 'src/components/table-paginations-action/TablePagination';
   
@@ -20,6 +23,7 @@ import {
     page,
     rowsPerPage,
     handleChangePage,
+    handleEdit,
     handleChangeRowsPerPage,
     isLoading,
     isError,
@@ -49,12 +53,15 @@ import {
                 <TableCell align="center">
                   <Typography variant="h6">Status</Typography>
                 </TableCell>
+                <TableCell align="center">
+                  <Typography variant="h6">Aksi</Typography>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {isLoading ? (
                 <TableRow>
-                  <TableCell colSpan={6}>
+                  <TableCell colSpan={7}>
                     <Box
                       sx={{
                         display: 'flex',
@@ -69,7 +76,7 @@ import {
                 </TableRow>
               ) : isError ? (
                 <TableRow>
-                  <TableCell colSpan={6}>
+                  <TableCell colSpan={7}>
                     <Box
                       sx={{
                         display: 'flex',
@@ -86,7 +93,7 @@ import {
                 </TableRow>
               ) : absensi.length === 0 ? (
                 <TableRow>
-                  <TableCell colSpan={6}>
+                  <TableCell colSpan={7}>
                     <Box
                       sx={{
                         display: 'flex',
@@ -107,7 +114,7 @@ import {
                 absensi
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((item, index) => (
-                    <TableRow key={`${item.nama}-${item.tanggal}-${index}`}>
+                    <TableRow key={item.absensi_id}>
                       <TableCell>
                         <Typography sx={{ fontSize: '1rem' }}>
                           {page * rowsPerPage + index + 1}
@@ -130,43 +137,56 @@ import {
                         </Typography>
                       </TableCell>
                       <TableCell align="center">
-                      <Box
-                        sx={{
+                        <Box
+                          sx={{
                             display: 'inline-block',
                             padding: '6px 14px',
                             borderRadius: '8px',
                             backgroundColor:
-                            item.status_kehadiran === 'Masuk'
-                                ? '#DFFFE0'
+                              item.status_kehadiran === 'Masuk'
+                                ? '#DFFFE0' // Hijau muda
                                 : item.status_kehadiran === 'Pulang'
-                                ? '#FFE0E0'
+                                ? '#FFE0E0' // Merah muda
                                 : item.status_kehadiran === 'Izin'
-                                ? '#FFF6D5'
+                                ? '#FFF4CC' // Kuning pucat
                                 : item.status_kehadiran === 'Sakit'
-                                ? '#DDEEFF'
+                                ? '#D0E7FF' // Biru sangat muda
                                 : item.status_kehadiran === 'Alpa'
-                                ? '#F5D0C5'
-                                : '#F5F5F5',
+                                ? '#FFC1B3' // Peach
+                                : item.status_kehadiran === 'Terlambat'
+                                ? '#FFE4B5' // Oranye sangat muda
+                                : '#F5F5F5', // Default abu-abu muda
                             color:
-                            item.status_kehadiran === 'Masuk'
-                                ? '#008000'
+                              item.status_kehadiran === 'Masuk'
+                                ? '#008000' // Hijau
                                 : item.status_kehadiran === 'Pulang'
-                                ? '#FF0000'
+                                ? '#FF0000' // Merah
                                 : item.status_kehadiran === 'Izin'
-                                ? '#FFD700'
+                                ? '#CC9900' // Kuning gelap
                                 : item.status_kehadiran === 'Sakit'
-                                ? '#0000FF'
+                                ? '#0056B3' // Biru gelap
                                 : item.status_kehadiran === 'Alpa'
-                                ? '#FF4500'
-                                : '#000000',
+                                ? '#FF6347' // Tomat
+                                : item.status_kehadiran === 'Terlambat'
+                                ? '#CC6600' // Oranye gelap
+                                : '#000000', // Default hitam
                             fontWeight: 500,
                             fontSize: '0.85rem',
                             textAlign: 'center',
-                        }}
+                          }}
                         >
-                        {item.status_kehadiran}
+                          {item.status_kehadiran}
                         </Box>
                       </TableCell>
+                      <TableCell>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                                <Tooltip title="Edit" placement="bottom">
+                                <IconButton onClick={() => handleEdit(item.absensi_id)}>
+                                    <IconEdit width={18} />
+                                </IconButton>
+                                </Tooltip>
+                            </Box>
+                            </TableCell>
                     </TableRow>
                   ))
               )}
@@ -175,7 +195,7 @@ import {
               <TableRow>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  colSpan={6}
+                  colSpan={7}
                   count={absensi.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
@@ -198,6 +218,7 @@ import {
     rowsPerPage: PropTypes.number.isRequired,
     handleChangePage: PropTypes.func.isRequired,
     handleChangeRowsPerPage: PropTypes.func.isRequired,
+    handleEdit: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isError: PropTypes.bool.isRequired,
     errorMessage: PropTypes.string,

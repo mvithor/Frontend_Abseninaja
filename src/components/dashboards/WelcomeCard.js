@@ -1,13 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Box, Typography, Card, CardContent, Grid } from '@mui/material';
+import { Box, Typography, Card, CardContent, Grid, useTheme } from '@mui/material';
 import welcomeImg from 'src/assets/images/backgrounds/welcome-bg2.png';
 
 const WelcomeCard = () => {
-  const user = useSelector((state) => state.user); 
+  const user = useSelector((state) => state.user);
+  const theme = useTheme(); // Ambil mode tema
 
   return (
-    <Card elevation={0} sx={{ backgroundColor: (theme) => theme.palette.primary.light, py: 0 }}>
+    <Card 
+      elevation={0} 
+      sx={{ 
+        backgroundColor: theme.palette.mode === 'dark' 
+          ? theme.palette.primary.light // Warna biru lembut pada dark mode
+          : 'white', // Warna putih pada light mode
+        py: 0 
+      }}
+    >
       <CardContent sx={{ py: 2 }}>
         <Grid container spacing={3} justifyContent="space-between">
           <Grid item sm={6} display="flex" alignItems="center">

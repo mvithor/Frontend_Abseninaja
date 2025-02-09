@@ -10,6 +10,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers";
 import { TimePicker } from "@mui/x-date-pickers";
+import Autocomplete from "@mui/material/Autocomplete";
 import CustomFormLabel from "src/components/forms/theme-elements/CustomFormLabel";
 import CustomTextField from "src/components/forms/theme-elements/CustomTextField";
 import CustomSelect from "src/components/forms/theme-elements/CustomSelect";
@@ -26,7 +27,7 @@ const AbsensiForm = ({ setSuccess, setError }) => {
   const [formState, setFormState] = useState({
     siswa_id: '',
     kelas_id: '',
-    nama_kelas: '', // Tambahkan properti untuk menyimpan nama kelas
+    nama_kelas: '', 
     tanggal: '',
     jam_masuk: null,
     jam_pulang: null,
@@ -61,16 +62,30 @@ const AbsensiForm = ({ setSuccess, setError }) => {
     },
     onSuccess: (data) => {
       setSuccess(data.msg);
-      setError("");
+      setError(""); // Hapus error jika sukses
       setTimeout(() => navigate("/dashboard/admin-sekolah/absensi-siswa"), 3000);
     },
     onError: (error) => {
-      const errorMsg = error.response?.data?.msg || "Terjadi kesalahan saat menambahkan absensi siswa";
-      setError(errorMsg);
-      setSuccess("");
-      setTimeout(() => setError(''), 3000);
+      const errorDetails = error.response?.data?.errors || [];
+      const errorMsg = error.response?.data?.msg || "Terjadi kesalahan saat menambahkan data absensi";
+  
+      // Set error message
+      if (errorDetails.length > 0) {
+        setError(errorDetails.join(", "));
+      } else {
+        setError(errorMsg);
+      }
+      setSuccess(""); // Kosongkan success message
+    },
+    onSettled: () => {
+      // Hapus error dan success setelah 3 detik
+      setTimeout(() => {
+        setError("");
+        setSuccess("");
+      }, 3000);
     },
   });
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -134,27 +149,37 @@ const AbsensiForm = ({ setSuccess, setError }) => {
         <Grid container spacing={2} rowSpacing={1}>
           {/* Nama Siswa */}
           <Grid item xs={12} md={6}>
-            <CustomFormLabel htmlFor="siswa_id" sx={{ mt: 1.85 }}>Nama Siswa</CustomFormLabel>
-            <CustomSelect
+            <CustomFormLabel htmlFor="siswa_id" sx={{ mt: 1.85 }}>
+              Nama Siswa
+            </CustomFormLabel>
+            <Autocomplete
               id="siswa_id"
-              name="siswa_id"
-              value={formState.siswa_id}
-              onChange={handleChange}
-              fullWidth
-              required
-              displayEmpty
-            >
-              <MenuItem value="" disabled>
-                Pilih Siswa
-              </MenuItem>
-              {siswaOptions.map((siswaOption) => (
-                <MenuItem key={siswaOption.id} value={siswaOption.id}>
-                  {siswaOption.User.name}
-                </MenuItem>
-              ))}
-            </CustomSelect>
+              options={siswaOptions}
+              getOptionLabel={(option) => option.User.name} // Menampilkan nama siswa
+              value={siswaOptions.find((siswa) => siswa.id === formState.siswa_id) || null} // Menyesuaikan dengan nilai yang dipilih
+              onChange={(event, newValue) => {
+                setFormState({
+                  ...formState,
+                  siswa_id: newValue ? newValue.id : "", 
+                  kelas_id: newValue ? newValue.kelas_id : "", 
+                  nama_kelas: newValue ? newValue.Kelas.nama_kelas : "Tidak Diketahui"
+                });
+              }}
+              renderInput={(params) => (
+                <CustomTextField
+                  {...params}
+                  fullWidth
+                  placeholder="Cari / Pilih nama siswa"
+                  aria-label="Pilih nama siswa"
+                  InputProps={{
+                    ...params.InputProps,
+                    style: { height: 45 }, 
+                  }}
+                 
+                />
+              )}
+            />
           </Grid>
-
           {/* Nama Kelas */}
           <Grid item xs={12} md={6}>
             <CustomFormLabel htmlFor="nama_kelas" sx={{ mt: 1.85 }}>Kelas</CustomFormLabel>
